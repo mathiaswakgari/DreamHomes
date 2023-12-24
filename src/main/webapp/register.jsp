@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
   User: mathi
   Date: 12/24/2023
@@ -42,6 +42,12 @@
                     </div>
                 </div>
             </div>
+            <%
+                if(Objects.equals(request.getSession().getAttribute("status"), 422)){%>
+            <div class="w-3/4 ">
+                <p class="text-red-500 text-center">Account with this email already exists.</p>
+            </div><%}%>
+            <%request.getSession().setAttribute("status", 200);%>
             <div class="flex items-center justify-center mt-4">
                 <button class="bg-green-500 rounded-xl shadow-sm w-24 h-10 text-slate-50 hover:bg-green-600"  type="submit">Register</button>
             </div>

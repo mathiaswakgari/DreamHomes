@@ -45,8 +45,9 @@ public class Database {
         }
     }
 
-    public void insertIntoUsers(String fullName, String email, String password){
+    public boolean insertIntoUsers(String fullName, String email, String password){
         Connection connection = establishConnection();
+        boolean isInserted = false;
         String query = "INSERT INTO users(user_fullname, user_email, user_password) values(?, ?, ?)";
 
         try {
@@ -57,10 +58,14 @@ public class Database {
             preparedStatement.setString(3, password);
 
             preparedStatement.execute();
+            isInserted = true;
             System.out.println("User successfully added.");
+            return isInserted;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error adding user. " + e.getMessage());
+            return false;
         }
+
 
     }
 
