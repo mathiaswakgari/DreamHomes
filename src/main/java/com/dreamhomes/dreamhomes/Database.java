@@ -1,5 +1,6 @@
 package com.dreamhomes.dreamhomes;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 
 public class Database {
@@ -68,6 +69,20 @@ public class Database {
 
 
     }
+    public ResultSet getUser(String email){
+        Connection connection = establishConnection();
+        String query = "SELECT * FROM users where user_email=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 
 }
