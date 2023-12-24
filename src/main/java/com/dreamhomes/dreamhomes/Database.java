@@ -1,5 +1,7 @@
 package com.dreamhomes.dreamhomes;
 
+import com.dreamhomes.dreamhomes.models.User;
+
 import javax.xml.crypto.Data;
 import java.sql.*;
 
@@ -46,7 +48,7 @@ public class Database {
         }
     }
 
-    public boolean insertIntoUsers(String fullName, String email, String password){
+    public boolean insertIntoUsers(User user){
         Connection connection = establishConnection();
         boolean isInserted = false;
         String query = "INSERT INTO users(user_fullname, user_email, user_password) values(?, ?, ?)";
@@ -54,9 +56,9 @@ public class Database {
         try {
             System.out.println("Adding user...");
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, fullName);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, password);
+            preparedStatement.setString(1, user.getUser_fullname());
+            preparedStatement.setString(2, user.getUser_email());
+            preparedStatement.setString(3, user.getUser_password());
 
             preparedStatement.execute();
             isInserted = true;

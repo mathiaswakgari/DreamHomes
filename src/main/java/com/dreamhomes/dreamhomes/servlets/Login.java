@@ -29,20 +29,19 @@ public class Login extends HttpServlet {
                 if (!resultSet.next()) {
                     httpSession.setAttribute("status", 401);
                     resp.sendRedirect("/");
-                    break;
                 }else {
                     if(!Objects.equals(resultSet.getString("user_password"), password)){
                         httpSession.setAttribute("status", 401);
                         resp.sendRedirect("/");
-                        break;
                     }
                     else{
                         httpSession.setAttribute("status", 200);
                         //TODO: add user object to session
+                        httpSession.setAttribute("user_id", resultSet.getString("user_id"));
                         resp.sendRedirect("/home");
-                        break;
                     }
                 }
+                break;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
