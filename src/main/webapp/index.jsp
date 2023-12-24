@@ -7,7 +7,7 @@
 </head>
 <body class="h-screen w-screen">
   <div class="h-full w-full flex justify-center items-center bg-gray-200 ">
-    <div class="h-[650px] w-[450px] bg-white rounded-lg">
+    <div class="h-[650px] w-[450px] bg-white rounded-lg shadow-lg">
       <div class="w-full h-1/3 bg-green-300 flex items-center justify-center rounded-t-lg">
         <img class="w-48" src="assets/images/dream-homes-high-resolution-logo-transparent.svg" alt="logo">
       </div>
