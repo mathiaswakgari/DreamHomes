@@ -1,3 +1,4 @@
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,7 @@
       <div class="w-full h-1/3 bg-green-300 flex items-center justify-center rounded-t-lg">
         <img class="w-48" src="assets/images/dream-homes-high-resolution-logo-transparent.svg" alt="logo">
       </div>
-      <form method="post" action="" class="flex flex-col items-center justify-center h-2/3 w-full bg-gray-100 rounded-b-lg">
+      <form method="post" action="login" class="flex flex-col items-center justify-center h-2/3 w-full bg-gray-100 rounded-b-lg">
           <div class="w-3/4">
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
             <div class="mt-2">
@@ -28,6 +29,12 @@
             </div>
           </div>
         </div>
+        <%
+          if(Objects.equals(request.getSession().getAttribute("status"), 401)){%>
+        <div class="w-3/4 ">
+          <p class="text-red-500 text-center">Wrong email or password. Try again</p>
+        </div><%}%>
+        <%request.getSession().setAttribute("status", 200);%>
         <div class="flex items-center justify-center mt-4">
           <button class="bg-purple-500 rounded-xl shadow-sm w-24 h-10 text-slate-50 hover:bg-purple-600"  type="submit">Login</button>
         </div>
