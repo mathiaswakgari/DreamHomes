@@ -5,8 +5,15 @@
 <head>
   <title>Dream Homes : Find your next home</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="h-screen w-screen">
+<body class="h-screen w-screen" style="font-family: 'Poppins', sans-serif;">
   <div class="h-full w-full flex justify-center items-center" style="
         background-image: url('assets/images/background.png');
         height: 100%;
