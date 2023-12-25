@@ -5,6 +5,7 @@
 <head>
   <title>Dream Homes : Find your next home</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'></link>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,11 +13,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 </head>
 <body class="h-screen w-screen" style="font-family: 'Poppins', sans-serif;">
+  <input type="hidden" id="status" value="<%=request.getSession().getAttribute("status")%>"/>
   <div class="h-full w-full flex justify-center items-center" style="
         background-image: url('assets/images/background.png');
-        height: 100%;
+        height: 100vh;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;">
@@ -41,12 +44,9 @@
             </div>
           </div>
         </div>
-        <%
-          if(Objects.equals(request.getSession().getAttribute("status"), 401)){%>
-        <div class="w-3/4 ">
-          <p class="text-red-500 text-center">Wrong email or password. Try again</p>
-        </div><%}%>
-        <%request.getSession().setAttribute("status", 200);%>
+<%--        <%--%>
+<%--          if(Objects.equals(request.getSession().getAttribute("status"), 401)){}%>--%>
+<%--        <%request.getSession().setAttribute("status", 200);%>--%>
         <div class="flex items-center justify-center mt-4">
           <button class="bg-purple-500 rounded-xl shadow-sm w-24 h-10 text-slate-50 hover:bg-purple-600"  type="submit">Login</button>
         </div>
@@ -56,5 +56,21 @@
       </form>
     </div>
   </div>
+  <script>
+    const status = document.getElementById("status");
+    if(status.value == 401){
+      throw swal.fire({
+        title: "Login Failed",
+        text: "Try again with correct email and password",
+        icon: 'error',
+        confirmButton: "OK",
+        customClass:{
+          fontsize:"1px"
+        }
+      }).then(()=>{
+        <% request.getSession().setAttribute("status", 0);%>
+      })
+    }
+  </script>
 </body>
 </html>

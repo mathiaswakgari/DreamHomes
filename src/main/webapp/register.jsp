@@ -10,10 +10,13 @@
 <head>
     <title>Dream Homes : Find your next home</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'></link>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 </head>
+<input type="hidden" id="status" value="<%=request.getSession().getAttribute("status")%>"/>
 <body class="h-screen w-screen" style="font-family: 'Poppins', sans-serif;">
 <div class="h-full w-full flex justify-center items-center" style="
         background-image: url('assets/images/background.png');
@@ -50,11 +53,11 @@
                     </div>
                 </div>
             </div>
-            <%
-                if(Objects.equals(request.getSession().getAttribute("status"), 422)){%>
-            <div class="w-3/4 ">
-                <p class="text-red-500 text-center">Account with this email already exists.</p>
-            </div><%}%>
+<%--            <%--%>
+<%--                if(Objects.equals(request.getSession().getAttribute("status"), 422)){%>--%>
+<%--            <div class="w-3/4 ">--%>
+<%--                <p class="text-red-500 text-center">Account with this email already exists.</p>--%>
+<%--            </div><%}%>--%>
             <%request.getSession().setAttribute("status", 200);%>
             <div class="flex items-center justify-center mt-4">
                 <button class="bg-green-500 rounded-xl shadow-sm w-24 h-10 text-slate-50 hover:bg-green-600"  type="submit">Register</button>
@@ -66,5 +69,21 @@
 
     </div>
 </div>
+<script>
+    const status = document.getElementById("status");
+    if(status.value == 422){
+        throw swal.fire({
+            title: "Registration failed.",
+            text: "Account with this email already exists, ",
+            icon: 'error',
+            confirmButton: "OK",
+            customClass:{
+                fontsize:"1px"
+            }
+        }).then(()=>{
+            <% request.getSession().setAttribute("status", 0);%>
+        })
+    }
+</script>
 </body>
 </html>
