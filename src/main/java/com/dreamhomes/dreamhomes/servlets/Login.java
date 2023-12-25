@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
                         //TODO: add user object to session
                         httpSession.setAttribute("user_id", resultSet.getString("user_id"));
                         resp.sendRedirect("/home");
-                    }
+                                     }
                 }
                 break;
             } catch (SQLException e) {
