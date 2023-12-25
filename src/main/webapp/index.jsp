@@ -43,6 +43,9 @@
         <div class="flex items-center justify-center mt-4">
           <button class="bg-purple-500 rounded-xl shadow-sm w-24 h-10 text-slate-50 hover:bg-purple-600"  type="submit">Login</button>
         </div>
+        <div class="mt-1">
+          <p class="text-sm">Don't have an account? Register <span class="text-blue-500"><a href="register.jsp">here.</a></span></p>
+        </div>
       </form>
     </div>
   </div>

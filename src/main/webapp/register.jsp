@@ -56,7 +56,11 @@
             <div class="flex items-center justify-center mt-4">
                 <button class="bg-green-500 rounded-xl shadow-sm w-24 h-10 text-slate-50 hover:bg-green-600"  type="submit">Register</button>
             </div>
+            <div class="mt-1">
+                <p class="text-sm">Already have an account? Sign <span class="text-blue-500"><a href="/">here.</a></span></p>
+            </div>
         </form>
+
     </div>
 </div>
 </body>
