@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.upper{
+    background-image: url('assets/images/background8.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+/*@media screen and (max-width: 1200px)  {*/
+/*    .upper{*/
+/*        background-size: cover;*/
+/*    }*/
+/*}*/
+/*@media screen and (max-width: 2000px) and (min-width: 1200px) {*/
+/*    .upper{*/
+/*        background-size: 100vw 70vh;*/
+/*    }*/
+/*}*/
