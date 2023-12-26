@@ -23,11 +23,11 @@ public class Main extends HttpServlet {
         ArrayList Rows = new ArrayList();
 
         HttpSession httpSession = req.getSession();
-        ResultSet resultSet = database.getHomes();
+        ResultSet resultSet = database.getHomesWithAddress();
         try{
             while (resultSet.next()){
                 ArrayList row = new ArrayList();
-                for (int i = 1; i <= 13; i++){
+                for (int i = 1; i <= 8; i++){
                     row.add(resultSet.getString(i));
                 }
                 Rows.add(row);
@@ -36,7 +36,7 @@ public class Main extends HttpServlet {
             throw new RuntimeException();
         }
         httpSession.setAttribute("homesList", Rows);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("main.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/main.jsp");
         requestDispatcher.forward(req,resp);
     }
 }
