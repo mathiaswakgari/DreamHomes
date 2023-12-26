@@ -101,7 +101,6 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
-
     public boolean insertIntoUsers(User user){
         Connection connection = establishConnection();
         boolean isInserted = false;
@@ -200,10 +199,29 @@ public class Database {
         }
 
     }
-
-    public static void main(String[] args) {
-       Database database = new Database();
-       database.insertIntoHomes();
+    public ResultSet getHomes(){
+        Connection connection = establishConnection();
+        String query = "SELECT * FROM homes";
+        try {
+           Statement statement = connection.prepareStatement(query);
+            return statement.executeQuery(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+    public ResultSet getAddress(int addressId){
+        Connection connection = establishConnection();
+        String query = "SELECT * FROM address where address_id=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, addressId);
+
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 }
