@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.text.NumberFormat" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.Locale" %><%--
   Created by IntelliJ IDEA.
   User: mathi
@@ -13,6 +14,14 @@
     ArrayList rows = new ArrayList();
     if(request.getSession().getAttribute("homesList") != null){
         rows = (ArrayList) request.getSession().getAttribute("homesList");
+    }
+    ArrayList rowsSale = new ArrayList();
+    if(request.getSession().getAttribute("homesSale") != null){
+        rowsSale = (ArrayList) request.getSession().getAttribute("homesSale");
+    }
+    ArrayList rowsRent = new ArrayList();
+    if(request.getSession().getAttribute("homesRent") != null){
+        rowsRent = (ArrayList) request.getSession().getAttribute("homesRent");
     }
 %>
 <html>
@@ -143,17 +152,21 @@
             <%--House Card--%>
         </div>
     </div>
-    <%--Lexury Homes--%>
+    <%--Open houses--%>
+    <%--For Sale--%>
     <div class="w-screen my-8 px-10">
         <div class="mb-5">
-            <p class="font-semibold">Luxury Homes</p>
+            <p class="font-semibold">For Sale</p>
         </div>
         <div class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <% for (int i = 0; i<rowsSale.size(); i++) {
+                ArrayList homeSale = (ArrayList) rowsSale.get(i);
+            %>
             <%--House Card--%>
             <div class="mb-5 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
                     <img
-                            src="https://images.homes.com/listings/214/2200550253-128155561-original.jpg"
+                            src="<%=homeSale.get(3)%>"
                             class="h-full w-full object-cover"
                     />
                 </div>
@@ -161,10 +174,12 @@
                     <div class="mb-2 flex items-center justify-between ">
                         <div class="flex w-full">
                             <p class="mr-2 self-start text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                                ETB 29,640,000
+                                ETB <%=NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(homeSale.get(0).toString()))%>
                             </p>
-                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased">4 Beds</p>
-                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased">2.5 Baths</p>
+                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=homeSale.get(1)%>
+                                Beds</p>
+                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=homeSale.get(2)%>
+                                Baths</p>
                         </div>
                         <div>
                             <button
@@ -176,63 +191,32 @@
                         </div>
                     </div>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        5625 Westview Cir
+                        <%=homeSale.get(4)%>
                     </p>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        Dacona, CO 80514
+                        <%=homeSale.get(7) + ", " + homeSale.get(5) + " " + homeSale.get(6)%>
                     </p>
-
                 </div>
             </div>
+            <%}%>
             <%--House Card--%>
-            <div class="mb-5 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
-                <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
-                    <img
-                            src="https://images.homes.com/listings/214/2200550253-128155561-original.jpg"
-                            class="h-full w-full object-cover"
-                    />
-                </div>
-                <div class="p-6">
-                    <div class="mb-2 flex items-center justify-between ">
-                        <div class="flex w-full">
-                            <p class="mr-2 self-start text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                                ETB 29,640,000
-                            </p>
-                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased">4 Beds</p>
-                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased">2.5 Baths</p>
-                        </div>
-                        <div>
-                            <button
-                                    class=" select-none rounded-lg bg-blue-gray-900/10 text-center font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    type="button"
-                            >
-                                <i class="fa-regular fa-heart text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        5625 Westview Cir
-                    </p>
-                    <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        Dacona, CO 80514
-                    </p>
-
-                </div>
-            </div>
         </div>
-
     </div>
+    <%--For Sale--%>
     <%--For Rent--%>
     <div class="w-screen my-8 px-10">
         <div class="mb-5">
             <p class="font-semibold">For Rent</p>
         </div>
         <div class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <% for (int i = 0; i<rowsRent.size(); i++) {
+                ArrayList homeRent = (ArrayList) rowsRent.get(i);
+            %>
             <%--House Card--%>
             <div class="mb-5 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
                     <img
-                            src="https://images.homes.com/listings/214/2200550253-128155561-original.jpg"
+                            src="<%=homeRent.get(3)%>"
                             class="h-full w-full object-cover"
                     />
                 </div>
@@ -240,10 +224,12 @@
                     <div class="mb-2 flex items-center justify-between ">
                         <div class="flex w-full">
                             <p class="mr-2 self-start text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                                ETB 29,640,000
+                                ETB <%=NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(homeRent.get(0).toString()))%>
                             </p>
-                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased">4 Beds</p>
-                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased">2.5 Baths</p>
+                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=homeRent.get(1)%>
+                                Beds</p>
+                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=homeRent.get(2)%>
+                                Baths</p>
                         </div>
                         <div>
                             <button
@@ -255,53 +241,19 @@
                         </div>
                     </div>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        5625 Westview Cir
+                        <%=homeRent.get(4)%>
                     </p>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        Dacona, CO 80514
+                        <%=homeRent.get(7) + ", " + homeRent.get(5) + " " + homeRent.get(6)%>
                     </p>
-
                 </div>
             </div>
+            <%}%>
             <%--House Card--%>
-            <div class="mb-5 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
-                <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
-                    <img
-                            src="https://images.homes.com/listings/214/2200550253-128155561-original.jpg"
-                            class="h-full w-full object-cover"
-                    />
-                </div>
-                <div class="p-6">
-                    <div class="mb-2 flex items-center justify-between ">
-                        <div class="flex w-full">
-                            <p class="mr-2 self-start text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                                ETB 29,640,000
-                            </p>
-                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased">4 Beds</p>
-                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased">2.5 Baths</p>
-                        </div>
-                        <div>
-                            <button
-                                    class=" select-none rounded-lg bg-blue-gray-900/10 text-center font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    type="button"
-                            >
-                                <i class="fa-regular fa-heart text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        5625 Westview Cir
-                    </p>
-                    <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        Dacona, CO 80514
-                    </p>
-
-                </div>
-            </div>
         </div>
-
     </div>
-    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <%--For Rent--%>
+
 
 </body>
 </html>
