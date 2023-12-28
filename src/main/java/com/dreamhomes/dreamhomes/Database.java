@@ -221,6 +221,16 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
+    public ResultSet getHomesWithAddress(String prop, String value ){
+        Connection connection = establishConnection();
+        String query = "SELECT home_price,bed_number,bath_number,main_pic,address_1,state,postal_code,city FROM homes INNER JOIN dreamhomes.address a on homes.address_id = a.address_id WHERE "+ prop + "="+value;
+        try {
+            Statement statement = connection.prepareStatement(query);
+            return statement.executeQuery(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public ResultSet getAddress(int addressId){
         Connection connection = establishConnection();
         String query = "SELECT * FROM address where address_id=?";
