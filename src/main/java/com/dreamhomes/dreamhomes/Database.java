@@ -244,6 +244,17 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
+    public ResultSet getHome(int homeId){
+        Connection connection = establishConnection();
+        String query = "SELECT * from homes WHERE home_id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, homeId);
+            return preparedStatement.executeQuery();
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+    };
 
     public static void main(String[] args) {
         Database database = new Database();
