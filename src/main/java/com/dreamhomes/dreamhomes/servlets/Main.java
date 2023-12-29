@@ -32,21 +32,21 @@ public class Main extends HttpServlet {
         try{
             while (resultSet.next()){
                 ArrayList row = new ArrayList();
-                for (int i = 1; i <= 8; i++){
+                for (int i = 1; i <= 9; i++){
                     row.add(resultSet.getString(i));
                 }
                 Rows.add(row);
             }
             while (resultSet1.next()){
                 ArrayList rowSale = new ArrayList();
-                for (int i = 1; i<=8; i++){
+                for (int i = 1; i<=9; i++){
                     rowSale.add(resultSet1.getString(i));
                 }
                 RowsSale.add(rowSale);
             }
             while (resultSet1.next()){
                 ArrayList rowRent = new ArrayList();
-                for (int i = 1; i<=8; i++){
+                for (int i = 1; i<=9; i++){
                     rowRent.add(resultSet2.getString(i));
                 }
                 RowsRent.add(rowRent);

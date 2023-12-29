@@ -1,7 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.text.NumberFormat" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.Locale" %><%--
   Created by IntelliJ IDEA.
   User: mathi
@@ -39,14 +38,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
-<body class="h-screen w-screen bg-gray-200" style="font-family: 'Poppins', sans-serif;">
+<body class="h-screen overflow-x-hidden max-w-screen bg-gray-200" style="font-family: 'Poppins', sans-serif;">
     <div class="h-1/2 w-full upper flex flex-col items-center justify-between">
         <nav class=" w-full flex justify-between items-center h-20 px-3" style="background-color: rgba(0,0,0,0.5)">
             <div>
                 <img width="150px" src="assets/images/dream-homes-high-resolution-logo-white-transparent%20(2).svg" alt="logo"/>
             </div>
             <div>
-                <button class="bg-black  rounded-full w-24 h-10 text-white text-sm">Sign-in</button>
+                <button class="bg-orange-500 rounded-md w-24 h-10 text-white text-sm">Sign-in</button>
             </div>
         </nav>
         <div class="h-full w-full shadow-xl p-3 " style="background-color: rgba(0,0,0,0.5)">
@@ -62,12 +61,11 @@
         </div>
         <div class="lg:grid grid-cols-2">
             <div class="flex items-center justify-center m-5">
-                <div class="relative flex w-full max-w-[38rem] flex-row rounded-md bg-gray-50 bg-clip-border text-gray-700">
-                    <div class="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-md rounded-r-none bg-white bg-clip-border text-gray-700">
+                <div class="relative flex w-full max-w-[38rem] flex-row shadow-md rounded-sm bg-gray-50 bg-clip-border text-gray-700">
+                    <div class="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-sm rounded-r-none bg-white bg-clip-border text-gray-700">
                         <img
                                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
                                 alt="image"
-
                                 class="h-full w-full object-cover"
                         />
                     </div>
@@ -82,8 +80,8 @@
                 </div>
             </div>
             <div class="flex items-center justify-center m-5">
-                <div class="relative flex w-full max-w-[38rem] flex-row rounded-md bg-gray-50 bg-clip-border text-gray-700">
-                    <div class="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-md rounded-r-none bg-white bg-clip-border text-gray-700">
+                <div class="relative flex w-full shadow-md max-w-[38rem] flex-row rounded-sm bg-gray-50 bg-clip-border text-gray-700">
+                    <div class="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-sm rounded-r-none bg-white bg-clip-border text-gray-700">
                         <img
                                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
                                 alt="image"
@@ -113,7 +111,8 @@
                 ArrayList home = (ArrayList) rows.get(i);
             %>
             <%--House Card--%>
-            <div class="mb-5 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
+            <a href="home?home_id=<%=home.get(8)%>">
+            <div class="mb-5 cursor-pointer hover:scale-105 duration-300 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
                     <img
                             src="<%=home.get(3)%>"
@@ -148,6 +147,7 @@
                     </p>
                 </div>
             </div>
+            </a>
             <%}%>
             <%--House Card--%>
         </div>
@@ -163,7 +163,8 @@
                 ArrayList homeSale = (ArrayList) rowsSale.get(i);
             %>
             <%--House Card--%>
-            <div class="mb-5 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
+            <a href="home?home_id=<%=homeSale.get(8)%>">
+            <div class="mb-5 cursor-pointer hover:scale-105 duration-300 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
                     <img
                             src="<%=homeSale.get(3)%>"
@@ -198,6 +199,7 @@
                     </p>
                 </div>
             </div>
+            </a>
             <%}%>
             <%--House Card--%>
         </div>
@@ -213,7 +215,8 @@
                 ArrayList homeRent = (ArrayList) rowsRent.get(i);
             %>
             <%--House Card--%>
-            <div class="mb-5 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
+            <a href="home?home_id=<%=homeRent.get(8)%>">
+            <div class="mb-5 cursor-pointer hover:scale-105 duration-300 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
                     <img
                             src="<%=homeRent.get(3)%>"
@@ -248,12 +251,12 @@
                     </p>
                 </div>
             </div>
+            </a>
             <%}%>
             <%--House Card--%>
         </div>
     </div>
     <%--For Rent--%>
-
 
 </body>
 </html>

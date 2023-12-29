@@ -213,7 +213,7 @@ public class Database {
     }
     public ResultSet getHomesWithAddress(){
         Connection connection = establishConnection();
-        String query = "SELECT home_price,bed_number,bath_number,main_pic,address_1,state,postal_code,city FROM homes INNER JOIN dreamhomes.address a on homes.address_id = a.address_id";
+        String query = "SELECT home_price,bed_number,bath_number,main_pic,address_1,state,postal_code,city,home_id FROM homes INNER JOIN dreamhomes.address a on homes.address_id = a.address_id";
         try {
             Statement statement = connection.prepareStatement(query);
             return statement.executeQuery(query);
@@ -223,7 +223,7 @@ public class Database {
     }
     public ResultSet getHomesWithAddress(String prop, String value ){
         Connection connection = establishConnection();
-        String query = String.format("SELECT home_price,bed_number,bath_number,main_pic,address_1,state,postal_code,city FROM homes INNER JOIN" +
+        String query = String.format("SELECT home_price,bed_number,bath_number,main_pic,address_1,state,postal_code,city,home_id FROM homes INNER JOIN" +
                 " dreamhomes.address a on homes.address_id = a.address_id WHERE %s='%s'", prop,value);
         try {
             Statement statement = connection.createStatement();
