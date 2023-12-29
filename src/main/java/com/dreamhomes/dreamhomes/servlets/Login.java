@@ -17,11 +17,11 @@ import java.util.Objects;
 public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession httpSession = req.getSession();
         Database database = new Database();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        HttpSession httpSession = req.getSession();
 
         ResultSet resultSet = database.getUser(email);
         while (true){
@@ -38,7 +38,8 @@ public class Login extends HttpServlet {
                         httpSession.setAttribute("status", 200);
                         //TODO: add user object to session
                         httpSession.setAttribute("user_id", resultSet.getString("user_id"));
-                        resp.sendRedirect("/home");
+                        httpSession.setAttribute("user_fullname", resultSet.getString("user_fullname"));
+                        resp.sendRedirect("/main");
                                      }
                 }
                 break;

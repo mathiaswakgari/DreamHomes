@@ -20,12 +20,19 @@ import java.util.ArrayList;
 public class Main extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession httpSession = req.getSession();
+        String user_id =(String) httpSession.getAttribute("user_id");
+
+        if(user_id.isEmpty()){
+            resp.sendRedirect("/");
+        }else{
+
         Database database = new Database();
         ArrayList Rows = new ArrayList();
         ArrayList RowsSale = new ArrayList();
         ArrayList RowsRent = new ArrayList();
 
-        HttpSession httpSession = req.getSession();
+
         ResultSet resultSet = database.getHomesWithAddress();
         ResultSet resultSet1 = database.getHomesWithAddress("home_category", "sale");
         ResultSet resultSet2 = database.getHomesWithAddress("home_category", "rent");
@@ -59,5 +66,7 @@ public class Main extends HttpServlet {
         httpSession.setAttribute("homesRent", RowsRent);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/main.jsp");
         requestDispatcher.forward(req,resp);
+        }
+
     }
 }
