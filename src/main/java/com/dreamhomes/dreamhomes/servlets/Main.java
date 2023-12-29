@@ -20,12 +20,7 @@ import java.util.ArrayList;
 public class Main extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
-        String user_id =(String) httpSession.getAttribute("user_id");
-
-        if(user_id.isEmpty()){
-            resp.sendRedirect("/");
-        }else{
+        HttpSession httpSession = req.getSession(false);
 
         Database database = new Database();
         ArrayList Rows = new ArrayList();
@@ -68,5 +63,5 @@ public class Main extends HttpServlet {
         requestDispatcher.forward(req,resp);
         }
 
-    }
+
 }

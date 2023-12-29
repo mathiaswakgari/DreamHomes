@@ -1,9 +1,9 @@
 <%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-  if (!((String)(request.getSession().getAttribute("user_id"))).isEmpty()){
-      response.sendRedirect("main");
-  }
+//  if (!((String)(request.getSession().getAttribute("user_id"))).isEmpty()){
+//      response.sendRedirect("main");
+//  }
 %>
 <!DOCTYPE html>
 <html>

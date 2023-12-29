@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
+        HttpSession httpSession = req.getSession(true);
         Database database = new Database();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
