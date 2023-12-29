@@ -246,7 +246,7 @@ public class Database {
     }
     public ResultSet getHome(int homeId){
         Connection connection = establishConnection();
-        String query = "SELECT * from homes WHERE home_id = ?";
+        String query = "SELECT * from homes inner join address a on homes.address_id = a.address_id WHERE home_id = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, homeId);

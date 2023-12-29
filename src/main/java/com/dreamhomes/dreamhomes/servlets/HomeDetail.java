@@ -34,7 +34,7 @@ public class HomeDetail extends HttpServlet {
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
             int columnsNumber = resultSetMetaData.getColumnCount();
             while (resultSet.next()){
-                    for(int i = 1; i < columnsNumber; i++){
+                    for(int i = 1; i <= columnsNumber; i++){
                         home.add(resultSet.getObject(i));
 
 
