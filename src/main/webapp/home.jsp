@@ -30,12 +30,20 @@
 </head>
 <body class=" max-w-screen min-h-screen flex flex-col justify-center" style="font-family: 'Poppins', sans-serif;">
 <%-- NavBar--%>
-    <nav class="fixed top-0 bg-white  w-full flex justify-between items-center h-16 px-6 border-b-2 border-gray-100">
+    <nav class="fixed top-0 bg-white w-full flex justify-between items-center h-16 px-6 border-b-2 border-gray-100">
         <div>
             <img width="150px" src="assets/images/dream-homes-high-resolution-logo-black-transparent.svg" alt="logo"/>
         </div>
-        <div>
-            <button class="bg-orange-500 hover:bg-orange-600  rounded-md w-24 h-10 text-white text-sm">Sign-in</button>
+        <div class="flex gap-2">
+            <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
+                <i class="fa-regular fa-user"></i>
+                <p><%=request.getSession(false).getAttribute("user_fullname")%></p>
+            </div>
+            <div class="flex gap-2 text-white">
+                <button class="bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300" >
+                    Logout <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
         </div>
     </nav>
     <div class="w-full h-full p-16 pt-24">

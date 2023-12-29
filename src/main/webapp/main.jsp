@@ -38,16 +38,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
-<body class="h-screen overflow-x-hidden max-w-screen bg-gray-200" style="font-family: 'Poppins', sans-serif;">
-    <div class="h-1/2 w-full upper flex flex-col items-center justify-between">
-        <nav class=" w-full flex justify-between items-center h-20 px-3" style="background-color: rgba(0,0,0,0.5)">
-            <div>
-                <img width="150px" src="assets/images/dream-homes-high-resolution-logo-white-transparent%20(2).svg" alt="logo"/>
+<body class="h-screen overflow-x-hidden max-w-screen bg-white-200" style="font-family: 'Poppins', sans-serif;">
+    <nav class="fixed z-30 top-0 bg-white w-full flex justify-between items-center h-16 px-6 border-b-2 border-gray-100">
+        <div>
+            <img width="150px" src="assets/images/dream-homes-high-resolution-logo-black-transparent.svg" alt="logo"/>
+        </div>
+        <div class="flex gap-2">
+            <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
+                <i class="fa-regular fa-user"></i>
+                <p><%=request.getSession(false).getAttribute("user_fullname")%></p>
             </div>
-            <div>
-                <button class="bg-orange-500 rounded-md w-24 h-10 text-white text-sm">Sign-in</button>
+            <div class="flex gap-2 text-white">
+                <button class="bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300" >
+                    Logout <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
             </div>
-        </nav>
+        </div>
+
+    </nav>
+    <div class="h-1/2 w-full upper mt-16 flex flex-col items-center justify-between">
+
         <div class="h-full w-full shadow-xl p-3 " style="background-color: rgba(0,0,0,0.5)">
             <div class="h-full flex items-center justify-center">
                 <p class="text-white font-bold text-4xl">Find a home in a neighborhood you love.</p>
