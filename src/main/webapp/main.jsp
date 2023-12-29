@@ -50,7 +50,7 @@
             </div>
             <div class="flex gap-2 text-white">
                 <button class="bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300" >
-                    Logout <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <a href="logout">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                 </button>
             </div>
         </div>
