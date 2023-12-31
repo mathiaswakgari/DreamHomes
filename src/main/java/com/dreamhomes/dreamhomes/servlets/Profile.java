@@ -3,35 +3,47 @@ package com.dreamhomes.dreamhomes.servlets;
 import com.dreamhomes.dreamhomes.Database;
 import com.dreamhomes.dreamhomes.models.User;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+
 import java.io.IOException;
-@WebServlet("/register")
-public class Register extends HttpServlet {
+import java.io.InputStream;
+import java.util.Arrays;
+
+@WebServlet("/me")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 100
+)
+public class Profile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
+
+        Database database = new Database();
 
         String firstName = req.getParameter("firstname");
         String lastName = req.getParameter("lastname");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        User user = new User(firstName,lastName, email, password);
+        Part filePart = req.getPart("file");
 
-        Database database = new Database();
+        InputStream inputStream = null; // input stream of the upload file
 
-        boolean isInserted = database.insertIntoUsers(user);
-        if(isInserted){
-            resp.sendRedirect("/");
-        }else{
-            httpSession.setAttribute("status",422 );
-            resp.sendRedirect("/register.jsp");
+        if (filePart!=null){
+            inputStream = filePart.getInputStream();
         }
 
+        User user = new User(firstName, lastName, email, password, inputStream);
+        database.updateUser(user);
+
+        resp.sendRedirect("profile.jsp");
 
     }
+
 }

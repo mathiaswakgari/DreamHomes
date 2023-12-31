@@ -4,6 +4,7 @@ import com.dreamhomes.dreamhomes.models.User;
 
 import java.sql.*;
 
+import static java.sql.Types.BLOB;
 import static java.sql.Types.NULL;
 
 public class Database {
@@ -36,9 +37,11 @@ public class Database {
         Connection connection = establishConnection();
         String query = "CREATE TABLE users (" +
                 "user_id INT AUTO_INCREMENT PRIMARY KEY," +
-                "user_fullname VARCHAR(100) NOT NULL," +
-                "user_email VARCHAR(100) UNIQUE NOT NULL," +
-                "user_password VARCHAR(100) NOT NULL)";
+                "user_firstname VARCHAR(20) NOT NULL," +
+                "user_lastname VARCHAR(20) NOT NULL," +
+                "user_email VARCHAR(30) UNIQUE NOT NULL," +
+                "user_password VARCHAR(40) NOT NULL," +
+                "user_profile_picture LONGBLOB)";
         try {
             System.out.println("Creating Table...");
             Statement statement = connection.createStatement();
@@ -104,14 +107,17 @@ public class Database {
     public boolean insertIntoUsers(User user){
         Connection connection = establishConnection();
         boolean isInserted = false;
-        String query = "INSERT INTO users(user_fullname, user_email, user_password) values(?, ?, ?)";
+        String query = "INSERT INTO users(user_firstname,user_lastname, user_email, user_password, user_profile_picture)" +
+                " values(?, ?, ?,?,?)";
 
         try {
             System.out.println("Adding user...");
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, user.getUser_fullname());
-            preparedStatement.setString(2, user.getUser_email());
-            preparedStatement.setString(3, user.getUser_password());
+            preparedStatement.setString(1, user.getUser_firstname());
+            preparedStatement.setString(2, user.getUser_lastname());
+            preparedStatement.setString(3, user.getUser_email());
+            preparedStatement.setString(4, user.getUser_password());
+            preparedStatement.setNull(5, BLOB);
 
             preparedStatement.execute();
             isInserted = true;
@@ -201,6 +207,37 @@ public class Database {
         }
 
     }
+    public void updateUser(User user){
+        Connection connection = establishConnection();
+        String query = "UPDATE users SET user_firstname = ?, user_lastname = ?," +
+                "user_email = ?, user_password = ?, user_profile_picture = ?" +
+                "WHERE user_email = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user.getUser_firstname());
+            preparedStatement.setString(2, user.getUser_lastname());
+            preparedStatement.setString(3, user.getUser_email());
+            preparedStatement.setString(4, user.getUser_password());
+            if(user.getUser_profile_picture() != null){
+                preparedStatement.setBlob(5, user.getUser_profile_picture());
+            }else{
+                preparedStatement.setNull(5, BLOB);
+            }
+            preparedStatement.setString(6, user.getUser_email());
+
+            preparedStatement.execute();
+
+            System.out.println("User updated successfully.");
+        }catch (SQLException e){
+            System.out.println("Error updating user.");
+            throw new RuntimeException(e.getMessage());
+
+        }
+
+
+
+    }
     public ResultSet getHomes(){
         Connection connection = establishConnection();
         String query = "SELECT * FROM homes";
@@ -258,7 +295,7 @@ public class Database {
 
     public static void main(String[] args) {
         Database database = new Database();
-        database.insertIntoHomes();
+        database.createUsersTable();
     }
 
 

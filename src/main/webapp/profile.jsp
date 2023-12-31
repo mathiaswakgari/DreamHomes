@@ -42,15 +42,15 @@
             <p class="text-3xl font-semibold">Account Settings</p>
             <div>
                 <img class="rounded-full h-[100px] w-[100px] object-cover" src="assets/images/background8.png" alt="profile picture"/>
-                <label for="choose">
+                <label for="file">
                     <i class="relative top-[-20px] left-[72px] fa-solid fa-circle-plus text-2xl"></i>
                 </label>
-                <input id="choose" class="hidden" type="file">
+
             </div>
             <p class="font-semibold text-xl"><%=request.getSession().getAttribute("user_fullname")%></p>
             <p class="font-light text-xl"><%=request.getSession().getAttribute("user_email")%></p>
         </div>
-        <form method="get" action="">
+        <form method="post" action="me" enctype="multipart/form-data">
             <div class="pt-20 px-4 w-full flex-col justify-center items-center">
                 <p class="text-2xl font-semibold"><%=request.getSession().getAttribute("user_fullname")%>'s Profile</p>
                 <div class="w-full mt-8 flex items-center">
@@ -71,6 +71,7 @@
                         </div>
                     </div>
                 </div>
+                <input id="file" name="file" class="hidden" type="file">
                 <div class="w-full mt-8 flex items-center">
                     <div class="w-full mr-2">
                         <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
