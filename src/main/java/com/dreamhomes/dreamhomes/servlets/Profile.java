@@ -1,6 +1,6 @@
 package com.dreamhomes.dreamhomes.servlets;
 
-import com.dreamhomes.dreamhomes.Database;
+import com.dreamhomes.dreamhomes.services.Database;
 import com.dreamhomes.dreamhomes.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -12,7 +12,6 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 @WebServlet("/me")
 @MultipartConfig(

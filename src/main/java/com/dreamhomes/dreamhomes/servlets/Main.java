@@ -1,7 +1,6 @@
 package com.dreamhomes.dreamhomes.servlets;
 
-import com.dreamhomes.dreamhomes.Database;
-import com.mysql.cj.result.Row;
+import com.dreamhomes.dreamhomes.services.Database;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;

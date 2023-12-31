@@ -1,6 +1,6 @@
 package com.dreamhomes.dreamhomes.servlets;
 
-import com.dreamhomes.dreamhomes.Database;
+import com.dreamhomes.dreamhomes.services.Database;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

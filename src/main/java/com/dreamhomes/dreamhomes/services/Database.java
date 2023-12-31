@@ -1,4 +1,4 @@
-package com.dreamhomes.dreamhomes;
+package com.dreamhomes.dreamhomes.services;
 
 import com.dreamhomes.dreamhomes.models.User;
 
