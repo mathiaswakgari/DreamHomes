@@ -20,7 +20,7 @@ public class Register extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        User user = new User(firstName,lastName, email, password);
+        User user = new User(firstName,lastName, email, password, "");
 
         Database database = new Database();
 

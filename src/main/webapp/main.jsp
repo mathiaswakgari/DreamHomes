@@ -1,7 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="java.util.Locale" %><%--
+<%@ page import="java.util.Locale" %>
+<%@ page import="com.dreamhomes.dreamhomes.models.User" %><%--
   Created by IntelliJ IDEA.
   User: mathi
   Date: 12/25/2023
@@ -10,6 +11,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    User user = (User) request.getSession().getAttribute("user");
     ArrayList rows = new ArrayList();
     if(request.getSession().getAttribute("homesList") != null){
         rows = (ArrayList) request.getSession().getAttribute("homesList");
@@ -44,10 +46,12 @@
             <img width="150px" src="assets/images/dream-homes-high-resolution-logo-black-transparent.svg" alt="logo"/>
         </div>
         <div class="flex gap-2">
+            <a href="me">
             <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
                 <i class="fa-regular fa-user"></i>
-                <p><%=request.getSession(false).getAttribute("user_fullname")%></p>
+                <p><%=user.getUser_firstname() + " " + user.getUser_lastname()%></p>
             </div>
+            </a>
             <div class="flex gap-2 text-white">
                 <button class="bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300" >
                     <a href="logout">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a>

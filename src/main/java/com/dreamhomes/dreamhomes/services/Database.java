@@ -2,6 +2,8 @@ package com.dreamhomes.dreamhomes.services;
 
 import com.dreamhomes.dreamhomes.models.User;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.*;
 
 import static java.sql.Types.BLOB;
@@ -41,7 +43,7 @@ public class Database {
                 "user_lastname VARCHAR(20) NOT NULL," +
                 "user_email VARCHAR(30) UNIQUE NOT NULL," +
                 "user_password VARCHAR(40) NOT NULL," +
-                "user_profile_picture LONGBLOB)";
+                "user_profile_picture VARCHAR(255))";
         try {
             System.out.println("Creating Table...");
             Statement statement = connection.createStatement();
@@ -117,7 +119,7 @@ public class Database {
             preparedStatement.setString(2, user.getUser_lastname());
             preparedStatement.setString(3, user.getUser_email());
             preparedStatement.setString(4, user.getUser_password());
-            preparedStatement.setNull(5, BLOB);
+            preparedStatement.setString(5, user.getUser_profile_picture());
 
             preparedStatement.execute();
             isInserted = true;
@@ -194,16 +196,32 @@ public class Database {
             System.out.println("Error adding home. " + e.getMessage());
         }
     }
-    public ResultSet getUser(String email){
+    public User getUser(String email){
         Connection connection = establishConnection();
         String query = "SELECT * FROM users where user_email=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, email);
 
-            return preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+            int userId = resultSet.findColumn("user_id");
+            String userFirstname = resultSet.getString("user_firstname");
+            String userLastname = resultSet.getString("user_lastname");
+            String userEmail = resultSet.getString("user_email");
+            String userPassword = resultSet.getString("user_password");
+            String userProfilePicture = resultSet.getString("user_profile_picture");
+
+            connection.close();
+            return new User(userId, userFirstname,userLastname,userEmail,userPassword,userProfilePicture);
+            }else {
+                return null;
+            }
+
         } catch (SQLException e) {
+
             throw new RuntimeException(e);
+
         }
 
     }
@@ -219,11 +237,7 @@ public class Database {
             preparedStatement.setString(2, user.getUser_lastname());
             preparedStatement.setString(3, user.getUser_email());
             preparedStatement.setString(4, user.getUser_password());
-            if(user.getUser_profile_picture() != null){
-                preparedStatement.setBlob(5, user.getUser_profile_picture());
-            }else{
-                preparedStatement.setNull(5, BLOB);
-            }
+            preparedStatement.setString(5, user.getUser_profile_picture());
             preparedStatement.setString(6, user.getUser_email());
 
             preparedStatement.execute();

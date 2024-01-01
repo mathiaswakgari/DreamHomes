@@ -1,15 +1,18 @@
 package com.dreamhomes.dreamhomes.models;
 
 import java.io.InputStream;
+import java.sql.Blob;
 
 public class User {
+    private int user_id;
     private final String user_firstname;
     private final String user_lastname;
     private final String user_email;
     private final String user_password;
-    private InputStream user_profile_picture;
+    private final String user_profile_picture;
 
-    public User(String user_firstname,String user_lastname, String user_email, String user_password, InputStream user_profile_picture){
+    public User(int user_id,String user_firstname,String user_lastname, String user_email, String user_password, String user_profile_picture){
+        this.user_id = user_id;
         this.user_firstname = user_firstname;
         this.user_lastname = user_lastname;
         this.user_email = user_email;
@@ -17,13 +20,18 @@ public class User {
         this.user_profile_picture = user_profile_picture;
     }
 
-    public User(String user_firstname,String user_lastname, String user_email, String user_password){
+    public User(String user_firstname,String user_lastname, String user_email, String user_password,String user_profile_picture){
         this.user_firstname = user_firstname;
         this.user_lastname = user_lastname;
         this.user_email = user_email;
         this.user_password = user_password;
+        this.user_profile_picture = user_profile_picture;
     }
 
+
+    public int getUser_id() {
+        return user_id;
+    }
     public String getUser_firstname() {
         return user_firstname;
     }
@@ -40,9 +48,7 @@ public class User {
         return user_password;
     }
 
-    public InputStream getUser_profile_picture() {
+    public String getUser_profile_picture() {
         return user_profile_picture;
     }
-
-
 }
