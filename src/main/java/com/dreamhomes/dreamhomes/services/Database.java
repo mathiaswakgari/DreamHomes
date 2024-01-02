@@ -1,10 +1,12 @@
 package com.dreamhomes.dreamhomes.services;
 
+import com.dreamhomes.dreamhomes.models.Home;
 import com.dreamhomes.dreamhomes.models.User;
 
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.*;
+import java.util.ArrayList;
 
 import static java.sql.Types.BLOB;
 import static java.sql.Types.NULL;
@@ -252,12 +254,41 @@ public class Database {
 
 
     }
-    public ResultSet getHomes(){
+    public ArrayList<Home> getHomes(){
         Connection connection = establishConnection();
         String query = "SELECT * FROM homes";
+        ArrayList<Home> homes = new ArrayList<Home>();
+        Home home;
+
         try {
            Statement statement = connection.prepareStatement(query);
-            return statement.executeQuery(query);
+           ResultSet resultSet = statement.executeQuery(query);
+           while (resultSet.next()){
+               int homeId = resultSet.getInt("home_id");
+               int addressId = resultSet.getInt("address_id");
+               double homePrice = resultSet.getDouble("home_price");
+               int bedNumber = resultSet.getInt("bed_number");
+               int bathNumber = resultSet.getInt("bath_number");
+               double homeArea = resultSet.getDouble("home_area");
+               String homeAbout = resultSet.getString("home_about");
+               int yearBuilt = resultSet.getInt("year_built");
+               String homeType = resultSet.getString("home_type");
+               String homeUtilities = resultSet.getString("home_utilities");
+               String homeCategory = resultSet.getString("home_category");
+               String agentName = resultSet.getString("agent_name");
+               String agentNumber = resultSet.getString("agent_number");
+               String mainPic = resultSet.getString("main_pic");
+               String pic1 = resultSet.getString("pic_1");
+               String pic2 = resultSet.getString("pic_2");
+               String pic3 = resultSet.getString("pic_3");
+               String pic4 = resultSet.getString("pic_4");
+               String pic5 = resultSet.getString("pic_5");
+               String pic6 = resultSet.getString("pic_6");
+               
+               home = new Home(homeId,addressId,homePrice,bedNumber,bathNumber,homeArea,homeAbout,yearBuilt, homeType,homeUtilities,homeCategory,agentName,agentNumber,mainPic,pic1,pic2,pic3,pic4,pic5,pic6);
+               homes.add(home);
+           }
+           return homes;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
