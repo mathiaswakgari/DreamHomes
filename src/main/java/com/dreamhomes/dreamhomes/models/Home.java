@@ -21,7 +21,7 @@ public class Home {
     private final String pic4;
     private final String pic5;
     private final String pic6;
-
+    private Address address;
 
     public Home(int homeId, int addressId, double homePrice, int bedNumber, int bathNumber, double homeArea, String homeAbout, int yearBuilt, String homeType, String homeUtilities, String homeCategory, String agentName, String agentNumber, String mainPic, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6) {
         this.homeId = homeId;
@@ -46,7 +46,8 @@ public class Home {
         this.pic6 = pic6;
     }
 
-    public Home(int addressId, double homePrice, int bedNumber, int bathNumber, double homeArea, String homeAbout, int yearBuilt, String homeType, String homeUtilities, String homeCategory, String agentName, String agentNumber, String mainPic, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6) {
+    public Home(int homeId, int addressId, double homePrice, int bedNumber, int bathNumber, double homeArea, String homeAbout, int yearBuilt, String homeType, String homeUtilities, String homeCategory, String agentName, String agentNumber, String mainPic, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6, Address address) {
+        this.homeId = homeId;
         this.addressId = addressId;
         this.homePrice = homePrice;
         this.bedNumber = bedNumber;
@@ -66,6 +67,30 @@ public class Home {
         this.pic4 = pic4;
         this.pic5 = pic5;
         this.pic6 = pic6;
+        this.address = address;
+    }
+
+    public Home(int addressId, double homePrice, int bedNumber, int bathNumber, double homeArea, String homeAbout, int yearBuilt, String homeType, String homeUtilities, String homeCategory, String agentName, String agentNumber, String mainPic, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6, Address address) {
+        this.addressId = addressId;
+        this.homePrice = homePrice;
+        this.bedNumber = bedNumber;
+        this.bathNumber = bathNumber;
+        this.homeArea = homeArea;
+        this.homeAbout = homeAbout;
+        this.yearBuilt = yearBuilt;
+        this.homeType = homeType;
+        this.homeUtilities = homeUtilities;
+        this.homeCategory = homeCategory;
+        this.agentName = agentName;
+        this.agentNumber = agentNumber;
+        this.mainPic = mainPic;
+        this.pic1 = pic1;
+        this.pic2 = pic2;
+        this.pic3 = pic3;
+        this.pic4 = pic4;
+        this.pic5 = pic5;
+        this.pic6 = pic6;
+        this.address = address;
     }
 
     public int getHomeId() {
@@ -103,7 +128,6 @@ public class Home {
     public String getHomeType() {
         return homeType;
     }
-
     public String getHomeUtilities() {
         return homeUtilities;
     }
@@ -148,7 +172,7 @@ public class Home {
         return pic6;
     }
 
-
-
-
+    public Address getAddress() {
+        return address;
+    }
 }

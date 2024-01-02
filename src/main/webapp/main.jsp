@@ -2,7 +2,9 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="com.dreamhomes.dreamhomes.models.User" %><%--
+<%@ page import="com.dreamhomes.dreamhomes.models.User" %>
+<%@ page import="com.dreamhomes.dreamhomes.models.Home" %>
+<%@ page import="com.dreamhomes.dreamhomes.models.Address" %><%--
   Created by IntelliJ IDEA.
   User: mathi
   Date: 12/25/2023
@@ -12,17 +14,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User user = (User) request.getSession().getAttribute("user");
-    ArrayList rows = new ArrayList();
-    if(request.getSession().getAttribute("homesList") != null){
-        rows = (ArrayList) request.getSession().getAttribute("homesList");
+
+    String fullName = user.getUser_firstname() + " " + user.getUser_lastname();
+
+    ArrayList<Home> allHomes= new ArrayList<Home>();
+    if(request.getSession().getAttribute("allHomes") != null){
+        allHomes= (ArrayList<Home>) request.getSession(false).getAttribute("allHomes");
     }
-    ArrayList rowsSale = new ArrayList();
-    if(request.getSession().getAttribute("homesSale") != null){
-        rowsSale = (ArrayList) request.getSession().getAttribute("homesSale");
+
+    ArrayList<Home> sellHomes = new ArrayList<Home>();
+    if(request.getSession().getAttribute("sellHomes") != null){
+        sellHomes = (ArrayList) request.getSession().getAttribute("sellHomes");
     }
-    ArrayList rowsRent = new ArrayList();
-    if(request.getSession().getAttribute("homesRent") != null){
-        rowsRent = (ArrayList) request.getSession().getAttribute("homesRent");
+
+    ArrayList<Home> rentHomes = new ArrayList<Home>();
+    if(request.getSession().getAttribute("rentHomes") != null){
+        rentHomes = (ArrayList) request.getSession().getAttribute("rentHomes");
     }
 %>
 <html>
@@ -49,7 +56,7 @@
             <a href="me">
             <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
                 <i class="fa-regular fa-user"></i>
-                <p><%=user.getUser_firstname() + " " + user.getUser_lastname()%></p>
+                <p><%=fullName%></p>
             </div>
             </a>
             <div class="flex gap-2 text-white">
@@ -121,15 +128,15 @@
             <p class="font-semibold">Open Houses</p>
         </div>
         <div class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <% for (int i = 0; i<rows.size(); i++) {
-                ArrayList home = (ArrayList) rows.get(i);
+            <% for (Home home : allHomes) {
+                Address address = home.getAddress();
             %>
             <%--House Card--%>
-            <a href="home?home_id=<%=home.get(8)%>">
+            <a href="home?home_id=<%=home.getHomeId()%>">
             <div class="mb-5 cursor-pointer hover:scale-105 duration-300 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
                     <img
-                            src="<%=home.get(3)%>"
+                            src="<%=home.getMainPic()%>"
                             class="h-full w-full object-cover"
                     />
                 </div>
@@ -137,11 +144,11 @@
                     <div class="mb-2 flex items-center justify-between ">
                         <div class="flex w-full">
                             <p class="mr-2 self-start text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                                ETB <%=NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(home.get(0).toString()))%>
+                                ETB <%=NumberFormat.getNumberInstance(Locale.US).format(home.getHomePrice())%>
                             </p>
-                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=home.get(1)%>
+                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=home.getBedNumber()%>
                                 Beds</p>
-                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=home.get(2)%>
+                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=home.getBathNumber()%>
                                 Baths</p>
                         </div>
                         <div>
@@ -154,10 +161,10 @@
                         </div>
                     </div>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        <%=home.get(4)%>
+                        <%=address.getAddress1()%>
                     </p>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        <%=home.get(7) + ", " + home.get(5) + " " + home.get(6)%>
+                        <%=address.getCity() + ", " + address.getState() + " " + address.getPostalCode()%>
                     </p>
                 </div>
             </div>
@@ -167,21 +174,21 @@
         </div>
     </div>
     <%--Open houses--%>
-    <%--For Sale--%>
+    <%--For Sell--%>
     <div class="w-screen my-8 px-10">
         <div class="mb-5">
-            <p class="font-semibold">For Sale</p>
+            <p class="font-semibold">For sale</p>
         </div>
         <div class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <% for (int i = 0; i<rowsSale.size(); i++) {
-                ArrayList homeSale = (ArrayList) rowsSale.get(i);
+            <% for (Home home : sellHomes) {
+                Address address = home.getAddress();
             %>
             <%--House Card--%>
-            <a href="home?home_id=<%=homeSale.get(8)%>">
+            <a href="home?home_id=<%=home.getHomeId()%>">
             <div class="mb-5 cursor-pointer hover:scale-105 duration-300 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
                     <img
-                            src="<%=homeSale.get(3)%>"
+                            src="<%=home.getMainPic()%>"
                             class="h-full w-full object-cover"
                     />
                 </div>
@@ -189,11 +196,11 @@
                     <div class="mb-2 flex items-center justify-between ">
                         <div class="flex w-full">
                             <p class="mr-2 self-start text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                                ETB <%=NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(homeSale.get(0).toString()))%>
+                                ETB <%=NumberFormat.getNumberInstance(Locale.US).format(home.getHomePrice())%>
                             </p>
-                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=homeSale.get(1)%>
+                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=home.getBedNumber()%>
                                 Beds</p>
-                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=homeSale.get(2)%>
+                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=home.getBathNumber()%>
                                 Baths</p>
                         </div>
                         <div>
@@ -206,10 +213,10 @@
                         </div>
                     </div>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        <%=homeSale.get(4)%>
+                        <%=address.getAddress1()%>
                     </p>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        <%=homeSale.get(7) + ", " + homeSale.get(5) + " " + homeSale.get(6)%>
+                        <%=address.getCity() + ", " +address.getState() + " " + address.getPostalCode()%>
                     </p>
                 </div>
             </div>
@@ -225,15 +232,15 @@
             <p class="font-semibold">For Rent</p>
         </div>
         <div class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <% for (int i = 0; i<rowsRent.size(); i++) {
-                ArrayList homeRent = (ArrayList) rowsRent.get(i);
+            <% for (Home home: rentHomes) {
+                Address address = home.getAddress();
             %>
             <%--House Card--%>
-            <a href="home?home_id=<%=homeRent.get(8)%>">
+            <a href="home?home_id=<%=home.getHomeId()%>">
             <div class="mb-5 cursor-pointer hover:scale-105 duration-300 relative flex w-96 flex-col rounded-sm bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="relative mx-4 mt-4 h-54 overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700">
                     <img
-                            src="<%=homeRent.get(3)%>"
+                            src="<%=home.getMainPic()%>"
                             class="h-full w-full object-cover"
                     />
                 </div>
@@ -241,11 +248,11 @@
                     <div class="mb-2 flex items-center justify-between ">
                         <div class="flex w-full">
                             <p class="mr-2 self-start text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                                ETB <%=NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(homeRent.get(0).toString()))%>
+                                ETB <%=NumberFormat.getNumberInstance(Locale.US).format(home.getHomePrice())%>
                             </p>
-                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=homeRent.get(1)%>
+                            <p class="mr-2 block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=home.getBedNumber()%>
                                 Beds</p>
-                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=homeRent.get(2)%>
+                            <p class="block text-base font-medium leading-relaxed text-gray-400 antialiased"><%=home.getBathNumber()%>
                                 Baths</p>
                         </div>
                         <div>
@@ -258,10 +265,10 @@
                         </div>
                     </div>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        <%=homeRent.get(4)%>
+                        <%=address.getAddress1()%>
                     </p>
                     <p class=" text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                        <%=homeRent.get(7) + ", " + homeRent.get(5) + " " + homeRent.get(6)%>
+                        <%=address.getCity() + ", " + address.getState() + " " + address.getPostalCode()%>
                     </p>
                 </div>
             </div>

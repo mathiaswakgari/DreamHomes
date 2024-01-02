@@ -1,5 +1,6 @@
 package com.dreamhomes.dreamhomes.servlets;
 
+import com.dreamhomes.dreamhomes.models.Home;
 import com.dreamhomes.dreamhomes.services.Database;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -26,22 +27,7 @@ public class HomeDetail extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("home.jsp");
 
         Database database = new Database();
-        ResultSet resultSet = database.getHome(Integer.parseInt(homeId));
-
-        ArrayList home = new ArrayList();
-
-        try {
-            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-            int columnsNumber = resultSetMetaData.getColumnCount();
-            while (resultSet.next()){
-                    for(int i = 1; i <= columnsNumber; i++){
-                        home.add(resultSet.getObject(i));
-
-
-            }}
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Home home = database.getHome(Integer.parseInt(homeId));
 
         httpSession.setAttribute("home", home);
         requestDispatcher.forward(req, resp);
