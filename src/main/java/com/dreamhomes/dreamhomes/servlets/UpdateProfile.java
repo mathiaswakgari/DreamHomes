@@ -1,5 +1,6 @@
 package com.dreamhomes.dreamhomes.servlets;
 
+import com.dreamhomes.dreamhomes.services.DropBox;
 import com.dreamhomes.dreamhomes.services.Database;
 import com.dreamhomes.dreamhomes.models.User;
 import jakarta.servlet.ServletException;
@@ -7,12 +8,7 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Date;
+import java.io.*;
 
 @WebServlet("/update_profile")
 @MultipartConfig(
@@ -22,9 +18,10 @@ import java.util.Date;
 )
 public class UpdateProfile extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
         Database database = new Database();
+        DropBox dropBox = new DropBox();
 
         User user = (User) req.getSession().getAttribute("user");
 
@@ -32,40 +29,44 @@ public class UpdateProfile extends HttpServlet {
         String lastName = req.getParameter("lastname");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        Part filePart = req.getPart("file");
 
-        if (filePart.getSize() == 0){
-            user = new User(firstName, lastName, email, password, user.getUser_profile_picture());
-        }else{
 
-        String fileExtension = filePart.getContentType();
-        fileExtension = "." + fileExtension.substring(fileExtension.lastIndexOf("/")+1);
+        try {
+            Part filePart = req.getPart("file");
+            if (filePart.getSize() == 0){
+                user = new User(firstName, lastName, email, password, user.getUser_profile_picture());
+            }else{
+                InputStream inputStream = filePart.getInputStream();
+                String contentType = filePart.getContentType();
+                File temp = File.createTempFile("profile", "." + contentType.substring(contentType.lastIndexOf('/')+ 1));
+                OutputStream outputStream = new FileOutputStream(temp);
 
-        String fileName = email+ new Date().getTime() + fileExtension;
-        System.out.println("file:"+ fileName);
-        String uploadPath = "C:/Users/mathi/Documents/7th Semester/Enterprise Application Development/Project/DreamHomes/src/main/webapp/storage/images/"+user.getUser_id() ;
+                try {
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = inputStream.read(buffer)) > 0){
+                        outputStream.write(buffer, 0, length);
+                    }
+                }finally {
+                    inputStream.close();
+                    outputStream.close();
+                }
 
-        Files.createDirectories(Paths.get(uploadPath));
+                String url = dropBox.upload(temp, user.getUser_id());
+                temp.delete();
 
-        uploadPath = uploadPath + "/" + fileName;
-
-        String filePath = "storage/images/" + user.getUser_id() + "/" + fileName;
-
-        FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
-        InputStream inputStream = filePart.getInputStream();
-
-        byte[] imageData = new byte[inputStream.available()];
-        inputStream.read(imageData);
-        fileOutputStream.write(imageData);
-        fileOutputStream.close();
-
-        user = new User(firstName, lastName, email, password, filePath);
+                user = new User(firstName, lastName, email, password, url);
+            }
+                database.updateUser(user);
+                req.getSession().setAttribute("user", user);
+                resp.sendRedirect("/me");
+        }catch (IOException |ServletException exception){
+            System.out.println(exception.getMessage());
         }
 
-        database.updateUser(user);
-        req.getSession().setAttribute("user", user);
-        resp.addHeader("Cache-Control", "no-cache");
-        resp.sendRedirect("/me");
+
+
+
 
 
     }
