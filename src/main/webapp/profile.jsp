@@ -51,7 +51,6 @@
                 <label for="file">
                     <i class="relative top-[-20px] left-[72px] fa-solid fa-circle-plus text-2xl"></i>
                 </label>
-
             </div>
             <p class="font-semibold text-xl"><%=fullname%></p>
             <p class="font-light text-xl"><%=user.getUser_email()%></p>
@@ -83,7 +82,7 @@
                         <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
                         <div class="mt-2">
                             <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-2xl">
-                                <input value=<%=user.getUser_email()%> required type="email"  name="email" id="email" autocomplete="email" class="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6">
+                                <input disabled value=<%=user.getUser_email()%> required type="email"  name="email" id="email" autocomplete="email" class="rounded-md disabled:text-gray-400 disabled:bg-gray-100 h-12 block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6">
                             </div>
                         </div>
                     </div>
