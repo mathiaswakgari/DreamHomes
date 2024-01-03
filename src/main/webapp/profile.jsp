@@ -25,7 +25,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
 </head>
+<input type="hidden" id="status" value="<%=request.getSession().getAttribute("isUpdated")%>"/>
 <body class="h-screen overflow-x-hidden max-w-screen bg-white-200" style="font-family: 'Poppins', sans-serif;">
     <nav class="fixed z-30 top-0 bg-white w-full flex justify-between items-center h-16 px-6 border-b-2 border-gray-100">
         <div>
@@ -82,7 +95,7 @@
                         <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
                         <div class="mt-2">
                             <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-2xl">
-                                <input disabled value=<%=user.getUser_email()%> required type="email"  name="email" id="email" autocomplete="email" class="rounded-md disabled:text-gray-400 disabled:bg-gray-100 h-12 block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6">
+                                <input readonly value=<%=user.getUser_email()%> required type="email"  name="email" id="email" autocomplete="email" class="rounded-md text-gray-200 h-12 block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6">
                             </div>
                         </div>
                     </div>
@@ -100,4 +113,13 @@
         </form>
     </div>
 </body>
+<script>
+    const isUpdated = document.getElementById("status").value;
+    if (isUpdated == "true"){
+        alertify.success("Profile updated successfully");
+    }else if (isUpdated == "false"){
+        alertify.error("Some error occurred")
+    }
+    <%request.getSession().removeAttribute("isUpdated");%>
+</script>
 </html>

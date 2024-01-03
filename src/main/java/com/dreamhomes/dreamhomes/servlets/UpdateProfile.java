@@ -5,6 +5,7 @@ import com.dreamhomes.dreamhomes.services.Database;
 import com.dreamhomes.dreamhomes.models.User;
 import com.dreamhomes.dreamhomes.services.Helpers;
 import com.dropbox.core.DbxException;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,12 +22,14 @@ import java.util.Calendar;
 )
 public class UpdateProfile extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         Database database = new Database();
         DropBox dropBox = new DropBox();
 
-        User user = (User) req.getSession().getAttribute("user");
+        HttpSession httpSession = req.getSession();
+
+        User user = (User) httpSession.getAttribute("user");
 
         String firstName = req.getParameter("firstname");
         String lastName = req.getParameter("lastname");
@@ -54,16 +57,19 @@ public class UpdateProfile extends HttpServlet {
                 inOneDay.add(Calendar.HOUR, 24);
                 resp.setDateHeader("Expires", inOneDay.getTimeInMillis());
 
-
+                httpSession.setAttribute("isUpdated", true);
                 resp.sendRedirect("/me");
 
+
         }catch (IOException |ServletException exception){
+            httpSession.setAttribute("isUpdated", false);
             System.out.println(exception.getMessage());
         } catch (DbxException e) {
+            httpSession.setAttribute("isUpdated", false);
             throw new RuntimeException(e.getMessage());
         }
 
-
+        
     }
 
     @Override
