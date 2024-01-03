@@ -45,6 +45,7 @@ public class UpdateProfile extends HttpServlet {
             }else{
                 File profilePhoto = new Helpers().convertPartToFile(filePart);
                 String url = dropBox.upload(profilePhoto, user.getUser_id());
+                profilePhoto.delete();// delete temp file after use
                 user = new User(firstName, lastName, email, password, url);
             }
 
@@ -69,7 +70,7 @@ public class UpdateProfile extends HttpServlet {
             throw new RuntimeException(e.getMessage());
         }
 
-        
+
     }
 
     @Override
