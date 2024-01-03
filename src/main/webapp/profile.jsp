@@ -11,6 +11,9 @@
 
     User user = (User) request.getSession().getAttribute("user");
     String fullname = user.getUser_firstname() + " " + user.getUser_lastname();
+
+    String profile = "assets/images/placeholder.jpg";
+    if (!user.getUser_profile_picture().isEmpty()) profile = user.getUser_profile_picture();
     System.out.println(user.getUser_profile_picture());
 %>
 <html>
@@ -60,7 +63,7 @@
         <div class=" flex flex-col items-center gap-6 pt-20 border-r-2">
             <p class="text-3xl font-semibold">Account Settings</p>
             <div>
-                <img class="rounded-full h-[100px] w-[100px] object-cover" src="<%=user.getUser_profile_picture()%>"  alt="profile picture"/>
+                <img class="rounded-full h-[100px] w-[100px] object-cover" src="<%=profile%>"  alt="profile picture"/>
                 <label for="file">
                     <i class="relative top-[-20px] left-[72px] fa-solid fa-circle-plus text-2xl"></i>
                 </label>
