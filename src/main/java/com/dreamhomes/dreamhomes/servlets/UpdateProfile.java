@@ -3,12 +3,15 @@ package com.dreamhomes.dreamhomes.servlets;
 import com.dreamhomes.dreamhomes.services.DropBox;
 import com.dreamhomes.dreamhomes.services.Database;
 import com.dreamhomes.dreamhomes.models.User;
+import com.dreamhomes.dreamhomes.services.Helpers;
+import com.dropbox.core.DbxException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.*;
+import java.util.Calendar;
 
 @WebServlet("/update_profile")
 @MultipartConfig(
@@ -33,40 +36,32 @@ public class UpdateProfile extends HttpServlet {
 
         try {
             Part filePart = req.getPart("file");
+
             if (filePart.getSize() == 0){
                 user = new User(firstName, lastName, email, password, user.getUser_profile_picture());
             }else{
-                InputStream inputStream = filePart.getInputStream();
-                String contentType = filePart.getContentType();
-                File temp = File.createTempFile("profile", "." + contentType.substring(contentType.lastIndexOf('/')+ 1));
-                OutputStream outputStream = new FileOutputStream(temp);
-
-                try {
-                    byte[] buffer = new byte[1024];
-                    int length;
-                    while ((length = inputStream.read(buffer)) > 0){
-                        outputStream.write(buffer, 0, length);
-                    }
-                }finally {
-                    inputStream.close();
-                    outputStream.close();
-                }
-
-                String url = dropBox.upload(temp, user.getUser_id());
-                temp.delete();
-
+                File profilePhoto = new Helpers().convertPartToFile(filePart);
+                String url = dropBox.upload(profilePhoto, user.getUser_id());
                 user = new User(firstName, lastName, email, password, url);
             }
+
                 database.updateUser(user);
+
                 req.getSession().setAttribute("user", user);
+
+                //Caching images
+                Calendar inOneDay = Calendar.getInstance();
+                inOneDay.add(Calendar.HOUR, 24);
+                resp.setDateHeader("Expires", inOneDay.getTimeInMillis());
+
+
                 resp.sendRedirect("/me");
+
         }catch (IOException |ServletException exception){
             System.out.println(exception.getMessage());
+        } catch (DbxException e) {
+            throw new RuntimeException(e.getMessage());
         }
-
-
-
-
 
 
     }

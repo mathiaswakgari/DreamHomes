@@ -248,9 +248,6 @@ public class Database {
             throw new RuntimeException(e.getMessage());
 
         }
-
-
-
     }
     public ArrayList<Home> getHomes(){
         Connection connection = establishConnection();

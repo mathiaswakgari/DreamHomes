@@ -13,11 +13,13 @@ import java.util.Date;
 
 public class DropBox {
     private final String appKey = "huxx1tos2ekr270";
-    private final String accessToken = "sl.Bs8kdmXJvys6wrxsXDLFLMjB1LbIo_IZb1cMQK-nWSIe-ajVfEt70K88vZYVKVHy7SPEYbHescL5ePfSXnCnUF6a36LMdSlMQTuDnHfYSZEbmKsN3OZWXNVwNlhBN3ypJ8P71E-KcV_eOxY_J4EknpQ";
+    private final String accessToken = "sl.Bs-imLNr0P_WU2za-F_ksKv55oYf4x9XyzTPzt_4EVlFNrwINa-iPJxbWkcfx2iBr5a8TFdNiDMXsaukps3IR6WHT7DAQ_f-LhamzqFSQtkD6uGSbha-hRyHj85Gn7TsAToq91_Pie66AbwPGC718Pg";
 
-    public String upload(File file, int id){
+    public String upload(File file, int id) throws DbxException {
+
         DbxRequestConfig config = DbxRequestConfig.newBuilder("dropbox/dream-homes").build();
         DbxClientV2 clientV2 = new DbxClientV2(config, this.accessToken);
+
         //upload to Dropbox
         try(InputStream in = new FileInputStream(file)) {
             FileMetadata metadata = clientV2.files().uploadBuilder("/images/profilePictures/user_" + id + new Date().getTime()+ "_" + ".jpg").uploadAndFinish(in);
