@@ -384,6 +384,55 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
+    public ArrayList<Home> getHomesWithAddress(String prop, String prop2, String value , String value2){
+        ArrayList<Home> homes= new ArrayList<Home>();
+        Home home;
+        Address address;
+        Connection connection = establishConnection();
+        String query = "SELECT * FROM homes INNER JOIN" +
+                " dreamhomes.address a on homes.address_id = a.address_id WHERE " + prop + "=" +
+                " '" + value + "' " + "AND " + prop2 + " LIKE '%" + value2 + "%'";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                int homeId = resultSet.getInt("home_id");
+                int addressId = resultSet.getInt("address_id");
+                double homePrice = resultSet.getDouble("home_price");
+                int bedNumber = resultSet.getInt("bed_number");
+                int bathNumber = resultSet.getInt("bath_number");
+                double homeArea = resultSet.getDouble("home_area");
+                String homeAbout = resultSet.getString("home_about");
+                int yearBuilt = resultSet.getInt("year_built");
+                String homeType = resultSet.getString("home_type");
+                String homeUtilities = resultSet.getString("home_utilities");
+                String homeCategory = resultSet.getString("home_category");
+                String agentName = resultSet.getString("agent_name");
+                String agentNumber = resultSet.getString("agent_number");
+                String mainPic = resultSet.getString("main_pic");
+                String pic1 = resultSet.getString("pic_1");
+                String pic2 = resultSet.getString("pic_2");
+                String pic3 = resultSet.getString("pic_3");
+                String pic4 = resultSet.getString("pic_4");
+                String pic5 = resultSet.getString("pic_5");
+                String pic6 = resultSet.getString("pic_6");
+                String address1 = resultSet.getString("address_1");
+                String address2 = resultSet.getString("address_2");
+                String address3 = resultSet.getString("address_3");
+                String city = resultSet.getString("city");
+                String state = resultSet.getString("state");
+                String country = resultSet.getString("country");
+                int postalCode = resultSet.getInt("postal_code");
+
+                address = new Address(addressId, address1,address2,address3,city,state,country,postalCode);
+                home = new Home(homeId,addressId,homePrice,bedNumber,bathNumber,homeArea,homeAbout,yearBuilt, homeType,homeUtilities,homeCategory,agentName,agentNumber,mainPic,pic1,pic2,pic3,pic4,pic5,pic6,address);
+                homes.add(home);
+            }
+            return homes;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public Address getAddress(int addressId){
         Connection connection = establishConnection();
         String query = "SELECT * FROM address where address_id=?";
