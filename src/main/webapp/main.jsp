@@ -70,8 +70,29 @@
     <div class="h-1/2 w-full upper mt-16 flex flex-col items-center justify-between">
 
         <div class="h-full w-full shadow-xl p-3 " style="background-color: rgba(0,0,0,0.5)">
-            <div class="h-full flex items-center justify-center">
+            <div class="h-full flex flex-col items-center justify-center">
                 <p class="text-white font-bold text-4xl">Find a home in a neighborhood you love.</p>
+<%--                Search--%>
+                <div class=" mt-2 w-full flex flex-col items-center">
+                    <form method="get" action="search" class="flex md:min-w-[500px] xl:min-w-[1000px]">
+                        <select name="category" id="category" class="bg-gray-200 opacity-90 border border-gray-300 text-gray-900 text-sm max-w-md rounded-l-md p-2.5">
+                            <option value="" selected>Select category</option>
+                            <option value="sell">For sale</option>
+                            <option value="rent">For rent</option>
+                        </select>
+                        <div class="w-full">
+                            <div class="relative w-full">
+                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                    <svg class="w-5 h-5 text-gray-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                                <input name="place" type="search" id="default-search" class="opacity-90 rounded-r-md block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-200 border border-gray-300 placeholder:text-gray-800" placeholder="Search place" required>
+                                <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2">Search</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+<%--                Search--%>
             </div>
         </div>
     </div>
