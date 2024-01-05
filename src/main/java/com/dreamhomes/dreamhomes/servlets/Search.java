@@ -31,7 +31,9 @@ public class Search extends HttpServlet {
         }
 
         httpSession.setAttribute("homes", homes);
+        httpSession.setAttribute("query", searchQuery);
+        httpSession.setAttribute("category", category);
         req.getRequestDispatcher("search.jsp").forward(req,resp);
-        
+
     }
 }

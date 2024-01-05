@@ -16,5 +16,25 @@
         <filter-name>Authorization Filter</filter-name>
         <url-pattern>/home</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/search</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/search.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/me</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/profile.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/update_profile</url-pattern>
+    </filter-mapping>
 
 </web-app>

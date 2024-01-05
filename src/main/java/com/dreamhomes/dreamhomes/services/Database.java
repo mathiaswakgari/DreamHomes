@@ -341,8 +341,8 @@ public class Database {
         Home home;
         Address address;
         Connection connection = establishConnection();
-        String query = String.format("SELECT * FROM homes INNER JOIN" +
-                " dreamhomes.address a on homes.address_id = a.address_id WHERE %s='%s'", prop,value);
+        String query = "SELECT * FROM homes INNER JOIN" +
+                " dreamhomes.address a on homes.address_id = a.address_id WHERE " + prop + " LIKE '%" + value + "%'";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
