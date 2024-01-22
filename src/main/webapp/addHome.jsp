@@ -240,6 +240,29 @@
                     </div>
                 </div>
             </div>
+<%--            Agent Info--%>
+            <div class="w-full">
+                <p class="text-2xl font-normal">Listing Agent</p>
+                <hr>
+                <div class="flex mt-5 w-full">
+                    <div class="w-full pr-1">
+                        <label for="agent_name" class="block text-sm font-medium leading-6 text-gray-900">Agent Name</label>
+                        <div class="mt-2 w-full">
+                            <div class="rounded-sm flex shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <input required type="text"  name="agent_name" id="agent_name" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full pr-1">
+                        <label for="agent_number" class="block text-sm font-medium leading-6 text-gray-900">Agent Number</label>
+                        <div class="mt-2">
+                            <div class="rounded-sm flex shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <input required type="text"  name="agent_number" id="agent_number" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 <%--            Submit--%>
             <div class=" flex items-center pb-10">
                 <button type="submit" class="h-10 text-white bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300">Save</button>
