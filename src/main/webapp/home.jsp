@@ -54,7 +54,7 @@
     </nav>
     <div class="w-full h-full p-16 pt-24">
 <%--        Photo Grid--%>
-        <div class="flex flex-wrap justify-center  gap-2 w-full">
+        <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center  gap-2 w-full">
 <%--            Main Pic--%>
 <%--            Other Pics--%>
                 <div class="rounded-sm shadow-md">
