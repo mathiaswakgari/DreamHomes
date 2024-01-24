@@ -170,8 +170,8 @@
                             <div class="mt-2">
                                 <select id="city" name="city" class="bg-gray-200 opacity-90 border border-gray-300 text-gray-900 text-sm w-full  rounded-l-md p-2.5">
                                     <option value="" selected>Select City</option>
-                                    <option value="aa">Addis Ababa</option>
-                                    <option value="adama">Adama</option>
+                                    <option value="AA">Addis Ababa</option>
+                                    <option value="ADAMA">Adama</option>
                                 </select>
                             </div>
                         </div>
@@ -180,8 +180,8 @@
                             <div class="mt-2">
                                 <select id="state" name="state" class="bg-gray-200 opacity-90 border border-gray-300 text-gray-900 text-sm w-full  rounded-l-md p-2.5">
                                     <option value="" selected>Select State</option>
-                                    <option value="aa">Addis Ababa</option>
-                                    <option value="oromia">Oromia</option>
+                                    <option value="AA">Addis Ababa</option>
+                                    <option value="OROMIA">Oromia</option>
                                 </select>
                             </div>
                         </div>
