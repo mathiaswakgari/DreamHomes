@@ -38,7 +38,7 @@
 <%-- NavBar--%>
     <nav class="fixed top-0 bg-white w-full flex justify-between items-center h-16 px-6 border-b-2 border-gray-100">
         <div>
-            <img width="150px" src="assets/images/dream-homes-high-resolution-logo-black-transparent.svg" alt="logo"/>
+            <img width="150px" src="assets/images/dream-homes-logo-transparent.svg" alt="logo"/>
         </div>
         <div class="flex gap-2">
             <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
