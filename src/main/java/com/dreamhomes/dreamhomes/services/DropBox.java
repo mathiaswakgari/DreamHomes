@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class DropBox {
     private final String appKey = "huxx1tos2ekr270";
-    private final String accessToken = "sl.BuS6VgEdB6zr37NtWy7nEo-Qf8Sjlm2I2uRPk23uWtKNLJMI5bd0JZp3VT_2dlR8DYkS3zwpKsgV09VJjH7lYEODnAt9P_9ywMFXjXb9lrsCPRU-2cLK0SKR3oKaxeUR1pKoITvfJY1EDO6aiMw7UmM";
+    private final String accessToken = "sl.BuQ26RSMYEKNOJ4II947jamCiy3U5DQ4op8w2TvTVgjEIkjbvwZAmU5iWMp6PVEj0_ef7559N_em5gceBoUOt3Gex-xu8QJViXlrj6eBHJPpefEZhOv_Z9ce32k38B6A84Kq6m9tDOREfoetz7CB9tY";
 
     public String upload(File file, int id) throws DbxException {
 

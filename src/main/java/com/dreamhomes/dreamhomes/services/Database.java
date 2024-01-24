@@ -204,6 +204,53 @@ public class Database {
             System.out.println("Error adding home. " + e.getMessage());
         }
     }
+    public ArrayList<User> getUsers(){
+        Connection connection = establishConnection();
+        String query = "SELECT * FROM users";
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            User user;
+
+            while (resultSet.next()){
+                int userId = resultSet.getInt("user_id");
+                String userFirstname = resultSet.getString("user_firstname");
+                String userLastname = resultSet.getString("user_lastname");
+                String userEmail = resultSet.getString("user_email");
+                String userPassword = resultSet.getString("user_password");
+                String userProfilePicture = resultSet.getString("user_profile_picture");
+
+                user =  new User(userId, userFirstname,userLastname,userEmail,userPassword,userProfilePicture);
+                users.add(user);
+
+            }
+            return users;
+
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+
+    };
+
+    public boolean deleteUser(int id){
+        Connection connection = establishConnection();
+        String query = "DELETE FROM users where user_id=?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.execute();
+            return true;
+
+
+        } catch (SQLException e) {
+            return false;
+
+
+        }
+    }
     public User getUser(String email){
         Connection connection = establishConnection();
         String query = "SELECT * FROM users where user_email=?";
