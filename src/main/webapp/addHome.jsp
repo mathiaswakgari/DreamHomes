@@ -46,7 +46,7 @@
     </nav>
     <div class="w-full h-full mt-16">
         <p class="text-2xl m-3 p-3 font-normal text-center">REGISTER HOME.</p>
-        <form method="post" action="addHome" class=" flex gap-y-[75px] flex-col mt-1 p-3  h-full w-full rounded-b-lg">
+        <form enctype="multipart/form-data" method="post" action="add" class=" flex gap-y-[75px] flex-col mt-1 p-3  h-full w-full rounded-b-lg">
 
             <div class="grid grid-cols-2 w-full items-center gap-5">
                 <div>
@@ -54,7 +54,7 @@
                         <label for="price" class="block text-sm font-medium leading-6 text-gray-900">Price</label>
                         <div class="mt-2">
                             <div class="rounded-sm flex shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input required type="number" step="0.01"  name="price " id="price" autocomplete="email" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" placeholder="$340,000.87">
+                                <input required type="number" step="0.01"  name="price" id="price" autocomplete="email" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" placeholder="$340,000.87">
                             </div>
                         </div>
                     </div>
@@ -63,14 +63,14 @@
                             <label for="bed" class="block text-sm font-medium leading-6 text-gray-900">Bedrooms</label>
                             <div class="mt-2">
                                 <div class="rounded-sm flex shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input required type="number"  name="bed " id="bed" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" placeholder="2">
+                                    <input required type="number"  name="bed" id="bed" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" placeholder="2">
                                 </div>
                             </div>
                         </div><div class="w-1/2">
                         <label for="bath" class="block text-sm font-medium leading-6 text-gray-900">Bathrooms</label>
                         <div class="mt-2">
                             <div class="rounded-sm flex shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input required type="number"  name="bath " id="bath" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" placeholder="2">
+                                <input required type="number"  name="bath" id="bath" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" placeholder="2">
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                             <label for="area" class="block text-sm font-medium leading-6 text-gray-900">Area</label>
                             <div class="mt-2">
                                 <div class="rounded-sm flex shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input required type="number" step="0.01"  name="area " id="area" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" placeholder="200">
+                                    <input required type="number" step="0.01"  name="area" id="area" class="rounded-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" placeholder="200">
                                 </div>
                             </div>
                         </div><div class="w-1/2">
@@ -100,6 +100,7 @@
                                     <option value="" selected>Select Type</option>
                                     <option value="Single Family">Single Family</option>
                                     <option value="Double Family">Double Family</option>
+                                    <option value="Condominium">Condominium</option>
                                 </select>
                             </div>
                         </div><div class="w-1/2">
@@ -126,7 +127,7 @@
                     <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
                     <div class="mt-2 w-full">
                         <div class="w-full flex shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                            <textarea required  name="about " id="about" class="min-h-48 max-h-72 w-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"></textarea>
+                            <textarea required  name="about" id="about" class="min-h-48 max-h-72 w-full h-12 block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"></textarea>
                         </div>
                     </div>
                 </div>

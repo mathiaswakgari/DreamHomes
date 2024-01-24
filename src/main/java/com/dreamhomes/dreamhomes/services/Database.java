@@ -132,31 +132,43 @@ public class Database {
 
 
     }
-    public void insertIntoAddress(){
+    public int insertIntoAddress(Address address){
         Connection connection = establishConnection();
         boolean isInserted = false;
+
+        int id = -1;
 
         String query = "INSERT INTO address(address_1, address_2, address_3, city, state, country, postal_code) values(?, ?, ?,?,?,?,?)";
 
         try {
             System.out.println("Adding address...");
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"3463 Switchgrass St");
-            preparedStatement.setNull(2,NULL );
-            preparedStatement.setNull(3, NULL);
-            preparedStatement.setString(4, "Dacona");
-            preparedStatement.setString(5, "CO");
-            preparedStatement.setString(6, "US");
-            preparedStatement.setString(7, "80514");
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1,address.getAddress1());
+            preparedStatement.setString(2,address.getAddress2());
+            preparedStatement.setString(3, address.getAddress3());
+            preparedStatement.setString(4, address.getCity());
+            preparedStatement.setString(5, address.getState());
+            preparedStatement.setString(6, address.getCountry());
+            preparedStatement.setInt(7, address.getPostalCode());
 
             preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            
+
+            if (resultSet.next()){
+                System.out.println("ID: "+resultSet.getInt(1));
+                id = resultSet.getInt(1);
+            }
+
             isInserted = true;
             System.out.println("Address successfully added.");
+
         } catch (SQLException e) {
             System.out.println("Error adding address. " + e.getMessage());
         }
+        return id;
     }
-    public void insertIntoHomes(){
+    public void insertIntoHomes(Home home){
         Connection connection = establishConnection();
         boolean isInserted = false;
 
@@ -165,29 +177,25 @@ public class Database {
         try {
             System.out.println("Adding home...");
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1,3);
-            preparedStatement.setInt(2, 33844560);
-            preparedStatement.setInt(3, 3);
-            preparedStatement.setInt(4, 2);
-            preparedStatement.setInt(5, 165);
-            preparedStatement.setString(6, "Welcome to your dream ranch home in the quaint Sweetgrass community! This stunning residence offers a blend of comfort, functionality, and timeless design. The open concept floor plan seamlessly combines the living, dining, and kitchen areas, providing an ideal space for both relaxation and entertainment. The living room features luxury vinyl plank and large windows, allowing an abundance of natural light to flood the room, creating a warm and welcoming atmosphere. Adjacent to the living area, you'll find a well-appointed kitchen with granite countertops, a giant island, and double stacked cabinets to provide ample storage for all of your culinary needs. Whether you're preparing a quick breakfast or hosting a dinner party, this kitchen will exceed your expectations. The home also offers three spacious bedrooms, each offering a peaceful sanctuary for rest and relaxation. The master suite features a generous layout, plush carpeting, walk-in closet and an en-suite bathroom. Downstairs, a full unfinished basement provides an area for endless possibilities, whether it be a home gym, extra storage space, or a future finished second floor! Outside, your backyard offers maximum privacy and is the perfect space for enjoying al fresco dining or simply unwinding in the fresh air. For car enthusiasts or those with a growing family, the two-car garage offers tons of space for parking vehicles and toys, storage, or even a workshop. This beautiful ranch home offers a blend of style, comfort, and space and you won't want to miss out! The Listing Team represents builder/seller as a Transaction Broker.");
-            preparedStatement.setInt(7, 2023);
-            preparedStatement.setString(8, "Single Family");
-            preparedStatement.setString(9, "Forced Air Heating and Cooling System\n" +
-                    "High Speed Internet\n" +
-                    "Cable TV Available\n" +
-                    "Natural Gas Connected\n" +
-                    "Phone Available");
-            preparedStatement.setString(10,"sell" );
-            preparedStatement.setString(11,"Team Lassed" );
-            preparedStatement.setString(12, "(833) 833-5957");
-            preparedStatement.setString(13,"https://images.homes.com/listings/215/7273718153-112445561/3463-switchgrass-st-dacono-co-primaryphoto.jpg" );
-            preparedStatement.setString(14,"" );
-            preparedStatement.setString(15,"" );
-            preparedStatement.setString(16,"" );
-            preparedStatement.setString(17,"" );
-            preparedStatement.setString(18,"" );
-            preparedStatement.setString(19,"" );
+            preparedStatement.setInt(1,home.getAddressId());
+            preparedStatement.setDouble(2, home.getHomePrice());
+            preparedStatement.setInt(3, home.getBedNumber());
+            preparedStatement.setInt(4, home.getBathNumber());
+            preparedStatement.setDouble(5, home.getHomeArea());
+            preparedStatement.setString(6, home.getHomeAbout());
+            preparedStatement.setInt(7, home.getYearBuilt());
+            preparedStatement.setString(8, home.getHomeType());
+            preparedStatement.setString(9, home.getHomeUtilities());
+            preparedStatement.setString(10,home.getHomeCategory());
+            preparedStatement.setString(11,home.getAgentName() );
+            preparedStatement.setString(12, home.getAgentNumber());
+            preparedStatement.setString(13,home.getMainPic());
+            preparedStatement.setString(14,home.getPic1() );
+            preparedStatement.setString(15,home.getPic2() );
+            preparedStatement.setString(16,home.getPic3());
+            preparedStatement.setString(17,home.getPic4() );
+            preparedStatement.setString(18,home.getPic5() );
+            preparedStatement.setString(19,home.getPic6() );
 
             preparedStatement.execute();
             isInserted = true;
