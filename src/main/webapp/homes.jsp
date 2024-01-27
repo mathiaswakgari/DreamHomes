@@ -32,7 +32,7 @@
 <input type="hidden" id="status" value="<%=request.getSession().getAttribute("isDeleted")%>"/>
 <body class=" max-w-screen min-h-screen flex flex-col justify-center" style="font-family: 'Poppins', sans-serif;">
 <%-- NavBar--%>
-<nav class=" fixed top-0 bg-white w-full flex justify-between items-center h-16 px-6 border-b-2 border-gray-100">
+<nav class="z-50 fixed top-0 bg-white w-full flex justify-between items-center h-16 px-6 border-b-2 border-gray-100">
     <div>
         <img width="150px" src="assets/images/dream-homes-logo-transparent.svg" alt="logo"/>
     </div>
@@ -48,7 +48,7 @@
         </div>
     </div>
 </nav>
-<div class="p-12 pt-24 flex flex-col items-center h-full w-full">
+<div class=" p-12 pt-24 flex flex-col items-center h-full w-full">
     <div class="flex flex-wrap -mx-3 mb-5">
         <div class="w-full max-w-full px-3 mb-6  mx-auto">
             <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
@@ -117,7 +117,7 @@
 <script>
     const isDeleted= document.getElementById("status").value;
     if (isDeleted == "true"){
-        alertify.success("User deleted successfully");
+        alertify.success("House deleted successfully");
     }else if (isDeleted == "false"){
         alertify.error("Some error occurred.")
     }

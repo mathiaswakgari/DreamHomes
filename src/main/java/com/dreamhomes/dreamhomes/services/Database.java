@@ -343,6 +343,22 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
+    public boolean deleteHome(int id){
+        Connection connection = establishConnection();
+        String query = "DELETE FROM homes where home_id=?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.execute();
+            return true;
+
+
+        } catch (SQLException e) {
+            return false;
+        }
+    }
     public ArrayList<Home> getHomesWithAddress(){
         Connection connection = establishConnection();
         ArrayList<Home> homes = new ArrayList<Home>();
