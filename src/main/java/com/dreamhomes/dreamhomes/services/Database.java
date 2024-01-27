@@ -43,7 +43,8 @@ public class Database {
                 "user_lastname VARCHAR(20) NOT NULL," +
                 "user_email VARCHAR(30) UNIQUE NOT NULL," +
                 "user_password VARCHAR(40) NOT NULL," +
-                "user_profile_picture VARCHAR(255))";
+                "user_profile_picture VARCHAR(255)," +
+                "user_isAdmin BOOLEAN)";
         try {
             System.out.println("Creating Table...");
             Statement statement = connection.createStatement();
@@ -109,8 +110,8 @@ public class Database {
     public boolean insertIntoUsers(User user){
         Connection connection = establishConnection();
         boolean isInserted = false;
-        String query = "INSERT INTO users(user_firstname,user_lastname, user_email, user_password, user_profile_picture)" +
-                " values(?, ?, ?,?,?)";
+        String query = "INSERT INTO users(user_firstname,user_lastname, user_email, user_password, user_profile_picture,user_isAdmin)" +
+                " values(?, ?, ?,?,?,false)";
 
         try {
             System.out.println("Adding user...");
@@ -220,8 +221,9 @@ public class Database {
                 String userEmail = resultSet.getString("user_email");
                 String userPassword = resultSet.getString("user_password");
                 String userProfilePicture = resultSet.getString("user_profile_picture");
+                boolean userIsAdmin = resultSet.getBoolean("user_isAdmin");
 
-                user =  new User(userId, userFirstname,userLastname,userEmail,userPassword,userProfilePicture);
+                user =  new User(userId, userFirstname,userLastname,userEmail,userPassword,userProfilePicture, userIsAdmin);
                 users.add(user);
 
             }
@@ -266,9 +268,10 @@ public class Database {
             String userEmail = resultSet.getString("user_email");
             String userPassword = resultSet.getString("user_password");
             String userProfilePicture = resultSet.getString("user_profile_picture");
+            boolean userIsAdmin = resultSet.getBoolean("user_isAdmin");
 
             connection.close();
-            return new User(userId, userFirstname,userLastname,userEmail,userPassword,userProfilePicture);
+            return new User(userId, userFirstname,userLastname,userEmail,userPassword,userProfilePicture, userIsAdmin);
             }else {
                 return null;
             }

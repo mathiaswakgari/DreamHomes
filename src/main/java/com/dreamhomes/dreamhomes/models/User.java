@@ -11,13 +11,16 @@ public class User {
     private final String user_password;
     private final String user_profile_picture;
 
-    public User(int user_id,String user_firstname,String user_lastname, String user_email, String user_password, String user_profile_picture){
+    private boolean user_isAdmin;
+
+    public User(int user_id,String user_firstname,String user_lastname, String user_email, String user_password, String user_profile_picture, boolean user_isAdmin){
         this.user_id = user_id;
         this.user_firstname = user_firstname;
         this.user_lastname = user_lastname;
         this.user_email = user_email;
         this.user_password = user_password;
         this.user_profile_picture = user_profile_picture;
+        this.user_isAdmin = user_isAdmin;
     }
 
     public User(String user_firstname,String user_lastname, String user_email, String user_password,String user_profile_picture){
@@ -26,6 +29,7 @@ public class User {
         this.user_email = user_email;
         this.user_password = user_password;
         this.user_profile_picture = user_profile_picture;
+
     }
 
 
@@ -50,5 +54,9 @@ public class User {
 
     public String getUser_profile_picture() {
         return user_profile_picture;
+    }
+
+    public boolean getUser_isAdmin() {
+        return user_isAdmin;
     }
 }

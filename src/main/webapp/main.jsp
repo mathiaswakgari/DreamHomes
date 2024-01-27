@@ -53,11 +53,22 @@
             <img width="150px" src="assets/images/dream-homes-logo-transparent.svg" alt="logo"/>
         </div>
         <div class="flex gap-2">
+
+            <%
+                if (!user.getUser_isAdmin()){
+
+            %>
+            <a href="admin">
+                <button class="text-white h-10 bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300" >
+                    Admin
+                </button>
+            </a>
+            <%}%>
             <a href="me">
-            <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
-                <i class="fa-regular fa-user"></i>
-                <p><%=fullName%></p>
-            </div>
+                <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
+                    <i class="fa-regular fa-user"></i>
+                    <p><%=fullName%></p>
+                </div>
             </a>
             <div class="flex gap-2 text-white">
                 <button class="bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300" >
