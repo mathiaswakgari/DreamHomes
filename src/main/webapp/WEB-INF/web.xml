@@ -8,6 +8,10 @@
         <filter-name>Authorization Filter</filter-name>
         <filter-class>com.dreamhomes.dreamhomes.filters.Authorization</filter-class>
     </filter>
+    <filter>
+        <filter-name>Admin Filter</filter-name>
+        <filter-class>com.dreamhomes.dreamhomes.filters.Admin</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>Authorization Filter</filter-name>
         <url-pattern>/main</url-pattern>
@@ -35,6 +39,62 @@
     <filter-mapping>
         <filter-name>Authorization Filter</filter-name>
         <url-pattern>/update_profile</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter </filter-name>
+        <url-pattern>/admin</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/admin.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/users</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/users.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/homes</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/homes.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/addHome.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/admin</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/admin.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/users</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/users.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/homes</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/homes.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/addHome.jsp</url-pattern>
     </filter-mapping>
 
 </web-app>

@@ -55,7 +55,7 @@
         <div class="flex gap-2">
 
             <%
-                if (!user.getUser_isAdmin()){
+                if (user.getUser_isAdmin()){
 
             %>
             <a href="admin">
