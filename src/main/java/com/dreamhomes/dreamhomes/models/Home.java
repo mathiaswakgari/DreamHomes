@@ -14,13 +14,13 @@ public class Home {
     private final String homeCategory;
     private final String agentName;
     private final String agentNumber;
-    private final String mainPic;
-    private final String pic1;
-    private final String pic2;
-    private final String pic3;
-    private final String pic4;
-    private final String pic5;
-    private final String pic6;
+    private String mainPic;
+    private String pic1;
+    private String pic2;
+    private String pic3;
+    private String pic4;
+    private String pic5;
+    private String pic6;
     private Address address;
 
     public Home(int homeId, int addressId, double homePrice, int bedNumber, int bathNumber, double homeArea, String homeAbout, int yearBuilt, String homeType, String homeUtilities, String homeCategory, String agentName, String agentNumber, String mainPic, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6) {
@@ -92,6 +92,23 @@ public class Home {
         this.pic6 = pic6;
         this.address = address;
     }
+    public Home(int homeId, int addressId, double homePrice, int bedNumber, int bathNumber, double homeArea, String homeAbout, int yearBuilt, String homeType, String homeUtilities, String homeCategory, String agentName, String agentNumber, Address address) {
+        this.homeId = homeId;
+        this.addressId = addressId;
+        this.homePrice = homePrice;
+        this.bedNumber = bedNumber;
+        this.bathNumber = bathNumber;
+        this.homeArea = homeArea;
+        this.homeAbout = homeAbout;
+        this.yearBuilt = yearBuilt;
+        this.homeType = homeType;
+        this.homeUtilities = homeUtilities;
+        this.homeCategory = homeCategory;
+        this.agentName = agentName;
+        this.agentNumber = agentNumber;
+        this.address = address;
+    }
+
 
     public int getHomeId() {
         return homeId;

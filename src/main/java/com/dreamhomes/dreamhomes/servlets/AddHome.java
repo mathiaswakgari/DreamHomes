@@ -35,7 +35,7 @@ public class AddHome extends HttpServlet {
         int bed = Integer.parseInt(req.getParameter("bed"));
         int bath = Integer.parseInt(req.getParameter("bath"));
         double area = Double.parseDouble(req.getParameter("area"));
-        int year = Integer.parseInt(req.getParameter("area"));
+        int year = Integer.parseInt(req.getParameter("year"));
         String type = req.getParameter("type");
         String category = req.getParameter("category");
         String utilities = req.getParameter("utilities");

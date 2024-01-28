@@ -72,7 +72,7 @@
                                     <th class="pb-3 text-end min-w-[10px]">ID</th>
                                     <th class="pb-3 text-end min-w-[150px]">ADDRESS 1</th>
                                     <th class="pb-3 pr-12 text-end min-w-[100px]"></th>
-
+                                    <th class="pb-3 pr-12 text-end min-w-[100px]"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -98,8 +98,14 @@
                                     </td>
                                     <td class="p-3 pr-0 text-end">
                                         <a href="delete_home?home_id=<%=home.getHomeId()%>">
-                                            <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                            <button class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 me-2 mb-2 ">
                                                 DELETE
+                                            </button></a>
+                                    </td>
+                                    <td class="p-3 pr-0 text-end">
+                                        <a href="update_home?home_id=<%=home.getHomeId()%>">
+                                            <button class="focus:outline-none text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 me-2 mb-2  ">
+                                                UPDATE
                                             </button></a>
                                     </td>
                                 </tr>

@@ -169,6 +169,33 @@ public class Database {
         }
         return id;
     }
+    public void updateAddress(Address address){
+        Connection connection = establishConnection();
+        String query = "UPDATE address SET address_1 = ?, address_2 = ?," +
+                "address_3 = ?, city = ?, state = ?," +
+                "country = ?, postal_code = ? " +
+                "WHERE address_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, address.getAddress1());
+            preparedStatement.setString(2, address.getAddress2());
+            preparedStatement.setString(3, address.getAddress3());
+            preparedStatement.setString(4, address.getCity());
+            preparedStatement.setString(5, address.getState());
+            preparedStatement.setString(6, address.getCountry());
+            preparedStatement.setInt(7, address.getPostalCode());
+            preparedStatement.setInt(8, address.getAddressId());
+
+            preparedStatement.execute();
+
+            System.out.println("Address updated successfully.");
+        }catch (SQLException e){
+            System.out.println("Error updating address.");
+            throw new RuntimeException(e.getMessage());
+
+        }
+    }
     public void insertIntoHomes(Home home){
         Connection connection = establishConnection();
         boolean isInserted = false;
@@ -203,6 +230,75 @@ public class Database {
             System.out.println("Home successfully added.");
         } catch (SQLException e) {
             System.out.println("Error adding home. " + e.getMessage());
+        }
+    }
+    public void updateHome(Home home){
+        Connection connection = establishConnection();
+        boolean isUpdated = false;
+
+        String query = "UPDATE homes SET home_price = ?, bed_number = ?, bath_number = ?, home_area = ?, home_about = ?," +
+                " year_built = ?,home_type = ?, home_utilities = ?, home_category = ?, agent_name = ?, agent_number = ?," +
+                " main_pic = ?, pic_1 = ?, pic_2 = ?, pic_3 = ?, pic_4 = ?, pic_5 = ?, pic_6 = ? where home_id = ?";
+
+        try {
+            System.out.println("Updating home...");
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDouble(1, home.getHomePrice());
+            preparedStatement.setInt(2, home.getBedNumber());
+            preparedStatement.setInt(3, home.getBathNumber());
+            preparedStatement.setDouble(4, home.getHomeArea());
+            preparedStatement.setString(5, home.getHomeAbout());
+            preparedStatement.setInt(6, home.getYearBuilt());
+            preparedStatement.setString(7, home.getHomeType());
+            preparedStatement.setString(8, home.getHomeUtilities());
+            preparedStatement.setString(9,home.getHomeCategory());
+            preparedStatement.setString(10,home.getAgentName() );
+            preparedStatement.setString(11, home.getAgentNumber());
+            preparedStatement.setString(12,home.getMainPic());
+            preparedStatement.setString(13,home.getPic1() );
+            preparedStatement.setString(14,home.getPic2() );
+            preparedStatement.setString(15,home.getPic3());
+            preparedStatement.setString(16,home.getPic4() );
+            preparedStatement.setString(17,home.getPic5() );
+            preparedStatement.setString(18,home.getPic6() );
+            preparedStatement.setInt(19, home.getHomeId());
+
+            preparedStatement.execute();
+            isUpdated = true;
+            System.out.println("Home successfully updated.");
+        } catch (SQLException e) {
+            System.out.println("Error updating home. " + e.getMessage());
+        }
+    }
+    public void updateHomeNoPics(Home home){
+        Connection connection = establishConnection();
+        boolean isUpdated = false;
+
+        String query = "UPDATE homes SET home_price = ?, bed_number = ?, bath_number = ?, home_area = ?, home_about = ?," +
+                " year_built = ?,home_type = ?, home_utilities = ?, home_category = ?, agent_name = ?, agent_number = ?" +
+                "where home_id = ?";
+
+        try {
+            System.out.println("Updating home...");
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDouble(1, home.getHomePrice());
+            preparedStatement.setInt(2, home.getBedNumber());
+            preparedStatement.setInt(3, home.getBathNumber());
+            preparedStatement.setDouble(4, home.getHomeArea());
+            preparedStatement.setString(5, home.getHomeAbout());
+            preparedStatement.setInt(6, home.getYearBuilt());
+            preparedStatement.setString(7, home.getHomeType());
+            preparedStatement.setString(8, home.getHomeUtilities());
+            preparedStatement.setString(9,home.getHomeCategory());
+            preparedStatement.setString(10,home.getAgentName() );
+            preparedStatement.setString(11, home.getAgentNumber());
+            preparedStatement.setInt(12,home.getHomeId());
+
+            preparedStatement.execute();
+            isUpdated = true;
+            System.out.println("Home successfully updated.");
+        } catch (SQLException e) {
+            System.out.println("Error updating home. " + e.getMessage());
         }
     }
     public ArrayList<User> getUsers(){
