@@ -12,25 +12,31 @@ import java.io.IOException;
 @WebServlet("/register")
 public class Register extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        String firstName = req.getParameter("firstname");
-        String lastName = req.getParameter("lastname");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        try{
+            HttpSession httpSession = req.getSession();
 
-        User user = new User(firstName,lastName, email, password,"");
+            String firstName = req.getParameter("firstname");
+            String lastName = req.getParameter("lastname");
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
 
-        Database database = new Database();
+            User user = new User(firstName,lastName, email, password,"");
 
-        boolean isInserted = database.insertIntoUsers(user);
-        if(isInserted){
-            resp.sendRedirect("/");
-        }else{
-            httpSession.setAttribute("status",422 );
-            resp.sendRedirect("/register.jsp");
+            Database database = new Database();
+
+            boolean isInserted = database.insertIntoUsers(user);
+            if(isInserted){
+                resp.sendRedirect("/");
+            }else{
+                httpSession.setAttribute("status",422 );
+                resp.sendRedirect("/register.jsp");
+            }
+        }catch (Exception e){
+            resp.sendRedirect("error.jsp");
         }
+
 
 
     }

@@ -15,28 +15,34 @@ import java.util.Objects;
 @WebServlet("/login")
 public class Login extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession(true);
-        Database database = new Database();
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        User user = database.getUser(email);
+        try{
+            HttpSession httpSession = req.getSession(true);
+            Database database = new Database();
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
 
-        if (user == null) {
-            httpSession.setAttribute("status", 401);
-            resp.sendRedirect("/");
-        }else {
-            if(!Objects.equals(user.getUser_password(), password)){
+            User user = database.getUser(email);
+
+            if (user == null) {
                 httpSession.setAttribute("status", 401);
                 resp.sendRedirect("/");
+            }else {
+                if(!Objects.equals(user.getUser_password(), password)){
+                    httpSession.setAttribute("status", 401);
+                    resp.sendRedirect("/");
+                }
+                else{
+                    httpSession.setAttribute("status", 200);
+                    httpSession.setAttribute("user", user);
+                    resp.sendRedirect("/main");
+                }
             }
-            else{
-                httpSession.setAttribute("status", 200);
-                httpSession.setAttribute("user", user);
-                resp.sendRedirect("/main");
-                             }
+        }catch (Exception e){
+            resp.sendRedirect("error.jsp");
         }
+
 
 
     }

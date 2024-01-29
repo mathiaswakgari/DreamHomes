@@ -13,15 +13,20 @@ import java.io.IOException;
 @WebServlet("/admin")
 public class Admin extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Database database = new Database();
-        int usersCount = database.getUsers().size();
-        int homesCount = database.getHomes().size();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("admin.jsp");
+        try {
+            Database database = new Database();
+            int usersCount = database.getUsers().size();
+            int homesCount = database.getHomes().size();
 
-        req.setAttribute("usersCount", usersCount);
-        req.setAttribute("homesCount", homesCount);
-        dispatcher.forward(req,resp);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("admin.jsp");
+
+            req.setAttribute("usersCount", usersCount);
+            req.setAttribute("homesCount", homesCount);
+            dispatcher.forward(req,resp);
+        } catch (ServletException e) {
+            resp.sendRedirect("error.jsp");
+        }
     }
 }

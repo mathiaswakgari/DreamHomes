@@ -15,25 +15,34 @@ import java.util.ArrayList;
 @WebServlet("/search")
 public class Search extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String category = req.getParameter("category");
-        String searchQuery = req.getParameter("place");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try {
+            String category = req.getParameter("category");
+            String searchQuery = req.getParameter("place");
 
-        Database database = new Database();
-        HttpSession httpSession = req.getSession(false);
+            Database database = new Database();
+            HttpSession httpSession = req.getSession(false);
 
-        ArrayList<Home> homes;
+            ArrayList<Home> homes;
 
-        if(category.isEmpty()){
-            homes = database.getHomesWithAddress("address_1", searchQuery);
-        }else{
-            homes= database.getHomesWithAddress("home_category",  "address_1",category, searchQuery);
+            if(category.isEmpty()){
+                homes = database.getHomesWithAddress("address_1", searchQuery);
+            }else{
+                homes= database.getHomesWithAddress("home_category",  "address_1",category, searchQuery);
+            }
+
+            httpSession.setAttribute("homes", homes);
+            httpSession.setAttribute("query", searchQuery);
+            httpSession.setAttribute("category", category);
+            try {
+                req.getRequestDispatcher("search.jsp").forward(req,resp);
+            } catch (ServletException e) {
+                resp.sendRedirect("error.jsp");
+            }
+        }catch (IOException e){
+            resp.sendRedirect("error.jsp");
         }
 
-        httpSession.setAttribute("homes", homes);
-        httpSession.setAttribute("query", searchQuery);
-        httpSession.setAttribute("category", category);
-        req.getRequestDispatcher("search.jsp").forward(req,resp);
 
     }
 }

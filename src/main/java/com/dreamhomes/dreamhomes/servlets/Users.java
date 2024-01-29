@@ -16,15 +16,20 @@ import java.util.ArrayList;
 @WebServlet("/users")
 public class Users extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Database database = new Database();
-        ArrayList<User> users = database.getUsers();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try{
+            Database database = new Database();
+            ArrayList<User> users = database.getUsers();
 
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("users.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("users.jsp");
 
-        req.setAttribute("users", users);
-        dispatcher.forward(req,resp);
+            req.setAttribute("users", users);
+            dispatcher.forward(req,resp);
+        }catch (ServletException e){
+            resp.sendRedirect("error.jsp");
+        }
+
 
     }
 }

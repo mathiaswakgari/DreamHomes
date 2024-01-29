@@ -15,14 +15,21 @@ import java.util.ArrayList;
 @WebServlet("/homes")
 public class Homes extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Database database = new Database();
-        ArrayList<Home> homes = database.getHomesWithAddress();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try{
+            Database database = new Database();
+            ArrayList<Home> homes = database.getHomesWithAddress();
 
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("homes.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("homes.jsp");
 
-        req.setAttribute("homes", homes);
-        dispatcher.forward(req,resp);
+            req.setAttribute("homes", homes);
+
+            dispatcher.forward(req,resp);
+        }catch (ServletException e){
+            resp.sendRedirect("error.jsp");
+        }
+
+
     }
 }

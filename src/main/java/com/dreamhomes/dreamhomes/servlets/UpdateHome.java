@@ -22,7 +22,10 @@ import java.io.IOException;
 )
 public class UpdateHome extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+        try{
+
+
         int homeId = Integer.parseInt(req.getParameter("home_id"));
         int addressId = Integer.parseInt(req.getParameter("address_id"));
 
@@ -101,7 +104,7 @@ public class UpdateHome extends HttpServlet {
                 resp.sendRedirect("homes");
 
             } catch (DbxException e) {
-                throw new RuntimeException(e);
+                resp.sendRedirect("error.jsp");
             }
 
 
@@ -109,5 +112,11 @@ public class UpdateHome extends HttpServlet {
 
 
 
-    }
+    }}catch (IOException | ServletException e){
+            try {
+                resp.sendRedirect("error.jsp");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
 }}

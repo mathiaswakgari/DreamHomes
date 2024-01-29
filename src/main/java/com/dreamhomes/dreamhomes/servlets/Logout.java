@@ -12,10 +12,15 @@ import java.io.IOException;
 @WebServlet("/logout")
 public class Logout extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession(false);
-        httpSession.invalidate();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try {
+            HttpSession httpSession = req.getSession(false);
+            httpSession.invalidate();
 
-        resp.sendRedirect("/");
+            resp.sendRedirect("/");
+        }catch (Exception e){
+            resp.sendRedirect("error.jsp");
+        }
+
     }
 }

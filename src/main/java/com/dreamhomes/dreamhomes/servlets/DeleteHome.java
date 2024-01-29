@@ -13,15 +13,23 @@ import java.io.IOException;
 @WebServlet("/delete_home")
 public class DeleteHome extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("home_id"));
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try{
+            int id = Integer.parseInt(req.getParameter("home_id"));
 
-        Database database = new Database();
-        boolean isDeleted = database.deleteHome(id);
+            Database database = new Database();
+            boolean isDeleted = database.deleteHome(id);
 
-        HttpSession httpSession  = req.getSession();
+            HttpSession httpSession  = req.getSession();
 
-        httpSession.setAttribute("isDeleted", isDeleted);
-        resp.sendRedirect("homes");
+            httpSession.setAttribute("isDeleted", isDeleted);
+
+            resp.sendRedirect("homes");
+
+        }
+        catch (Exception e){
+            resp.sendRedirect("error.jsp");
+        }
+
     }
 }

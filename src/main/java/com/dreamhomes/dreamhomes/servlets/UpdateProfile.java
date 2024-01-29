@@ -23,31 +23,31 @@ import java.util.Calendar;
 public class UpdateProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try{
+            Database database = new Database();
+            DropBox dropBox = new DropBox();
 
-        Database database = new Database();
-        DropBox dropBox = new DropBox();
+            HttpSession httpSession = req.getSession();
 
-        HttpSession httpSession = req.getSession();
+            User user = (User) httpSession.getAttribute("user");
 
-        User user = (User) httpSession.getAttribute("user");
-
-        String firstName = req.getParameter("firstname");
-        String lastName = req.getParameter("lastname");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+            String firstName = req.getParameter("firstname");
+            String lastName = req.getParameter("lastname");
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
 
 
-        try {
-            Part filePart = req.getPart("file");
+            try {
+                Part filePart = req.getPart("file");
 
-            if (filePart.getSize() == 0){
-                user = new User(firstName, lastName, email, password, user.getUser_profile_picture());
-            }else{
-                File profilePhoto = new Helpers().convertPartToFile(filePart);
-                String url = dropBox.upload(profilePhoto, user.getUser_id());
-                profilePhoto.delete();// delete temp file after use
-                user = new User(firstName, lastName, email, password, url);
-            }
+                if (filePart.getSize() == 0){
+                    user = new User(firstName, lastName, email, password, user.getUser_profile_picture());
+                }else{
+                    File profilePhoto = new Helpers().convertPartToFile(filePart);
+                    String url = dropBox.upload(profilePhoto, user.getUser_id());
+                    profilePhoto.delete();// delete temp file after use
+                    user = new User(firstName, lastName, email, password, url);
+                }
 
                 database.updateUser(user);
 
@@ -62,13 +62,18 @@ public class UpdateProfile extends HttpServlet {
                 resp.sendRedirect("/me");
 
 
-        }catch (IOException |ServletException exception){
-            httpSession.setAttribute("isUpdated", false);
-            System.out.println(exception.getMessage());
-        } catch (DbxException e) {
-            httpSession.setAttribute("isUpdated", false);
-            throw new RuntimeException(e.getMessage());
+            }catch (IOException |ServletException exception){
+                httpSession.setAttribute("isUpdated", false);
+                System.out.println(exception.getMessage());
+            } catch (DbxException e) {
+                httpSession.setAttribute("isUpdated", false);
+                throw new RuntimeException(e.getMessage());
+            }
+        }catch (Exception e){
+            resp.sendRedirect("error.jsp");
         }
+
+
 
 
     }
