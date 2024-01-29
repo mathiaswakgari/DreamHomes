@@ -303,7 +303,7 @@ public class Database {
     }
     public ArrayList<User> getUsers(){
         Connection connection = establishConnection();
-        String query = "SELECT * FROM users";
+        String query = "SELECT * FROM users WHERE user_isAdmin = 0";
         ArrayList<User> users = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();

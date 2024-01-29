@@ -10,8 +10,8 @@
 <%
     ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");
 
-    User user = (User) request.getSession().getAttribute("user");
-    String fullname = user.getUser_firstname() + " " + user.getUser_lastname();
+    User activeUser = (User) request.getSession().getAttribute("user");
+    String fullname = activeUser.getUser_firstname() + " " + activeUser.getUser_lastname();
 %>
 <html>
 <head>
