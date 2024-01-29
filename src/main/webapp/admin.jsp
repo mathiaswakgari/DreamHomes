@@ -64,11 +64,11 @@
   <div class="flex mt-16 p-5 gap-5 justify-center">
       <div class="rounded-md p-5 flex flex-col justify-between text-white w-[950px] xl:max-w-[500px] h-[250px] bg-blue-500">
           <p class="text-3xl">Users</p>
-          <a class="self-center" href="">
-              <button class="text-blue-400 h-10 bg-white rounded-xl hover:scale-105 w-36 hover:bg-gray-100 cursor:pointer duration-300" >
-                  Insert house<i class="pl-2 fa fa-add"></i>
-              </button>
-          </a>
+<%--          <a class="self-center" href="">--%>
+<%--              <button class="text-blue-400 h-10 bg-white rounded-xl hover:scale-105 w-36 hover:bg-gray-100 cursor:pointer duration-300" >--%>
+<%--                  Insert user<i class="pl-2 fa fa-add"></i>--%>
+<%--              </button>--%>
+<%--          </a>--%>
           <a class="self-center" href="users">
               <button class="text-blue-400 h-10 bg-white rounded-xl hover:scale-105 w-36 hover:bg-gray-100 cursor:pointer duration-300" >
                   Users<i class="pl-2 fa fa-list"></i>

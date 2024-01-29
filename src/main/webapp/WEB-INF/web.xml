@@ -66,6 +66,18 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/updateHome.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/update_home</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/updateHome</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
         <url-pattern>/addHome.jsp</url-pattern>
     </filter-mapping>
     <filter-mapping>
@@ -95,6 +107,18 @@
     <filter-mapping>
         <filter-name>Admin Filter</filter-name>
         <url-pattern>/addHome.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/updateHome.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/update_home</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Admin Filter</filter-name>
+        <url-pattern>/updateHome</url-pattern>
     </filter-mapping>
 
 </web-app>
