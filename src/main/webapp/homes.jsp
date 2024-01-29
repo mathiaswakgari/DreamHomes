@@ -1,7 +1,11 @@
 <%@ page import="com.dreamhomes.dreamhomes.models.Home" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dreamhomes.dreamhomes.models.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% ArrayList<Home> homes = (ArrayList<Home>) request.getAttribute("homes");%>
+<%
+    User user = (User) request.getSession().getAttribute("user");
+    String fullname = user.getUser_firstname() + " " + user.getUser_lastname();
+    ArrayList<Home> homes = (ArrayList<Home>) request.getAttribute("homes");%>
 <html>
 <head>
     <title>Dream Homes : Homes</title>
@@ -39,7 +43,7 @@
     <div class="flex gap-2">
         <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
             <i class="fa-regular fa-user"></i>
-            <p><%="fullname"%></p>
+            <p><%=fullname%></p>
         </div>
         <div class="flex gap-2 text-white">
             <button class="bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300" >

@@ -7,7 +7,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");%>
+<%
+    ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");
+
+    User user = (User) request.getSession().getAttribute("user");
+    String fullname = user.getUser_firstname() + " " + user.getUser_lastname();
+%>
 <html>
 <head>
     <title>Dream Homes : Users</title>
@@ -45,7 +50,7 @@
     <div class="flex gap-2">
         <div class="flex items-center gap-4 cursor-pointer duration-300 hover:bg-gray-100 p-2 rounded-md">
             <i class="fa-regular fa-user"></i>
-            <p><%="fullname"%></p>
+            <p><%=fullname%></p>
         </div>
         <div class="flex gap-2 text-white">
             <button class="bg-orange-500 rounded-md w-24 hover:bg-orange-600 cursor:pointer duration-300" >
